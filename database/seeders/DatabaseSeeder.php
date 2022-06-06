@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\Armada;
+use App\Models\Merk;
+use App\Models\Pelanggan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,13 +17,13 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
 
-    // function generateArmada(){
-    //     Armada::create([
-    //         'jenis' => '',
-    //         'plat_nomor' => '',
-    //         'transmisi' => ''
-    //     ]);
-    // }
+    function generateMerk(){
+        Merk::create(['nama'=>'Datsun', 'produsen'=>'Jepang']);
+        Merk::create(['nama'=>'BMW', 'produsen'=>'Jerman']);
+        Merk::create(['nama'=>'Toyota', 'produsen'=>'Jepang']);
+        Merk::create(['nama'=>'Honda', 'produsen'=>'Jepang']);
+        Merk::create(['nama'=>'Mercedes-benz', 'produsen'=>'Jerman']);
+    }
 
 
     public function run()
@@ -32,7 +34,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
+        $this->generateMerk();
         Armada::factory(30)->create();
+        Pelanggan::factory(20)->create();
+
     }
 }
