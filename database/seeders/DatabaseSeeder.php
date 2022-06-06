@@ -8,6 +8,9 @@ use Illuminate\Database\Seeder;
 use App\Models\Armada;
 use App\Models\Merk;
 use App\Models\Pelanggan;
+use App\Models\Booking;
+use App\Models\BookingArmada;
+use App\Models\Pembayaran;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,6 +40,8 @@ class DatabaseSeeder extends Seeder
         $this->generateMerk();
         Armada::factory(30)->create();
         Pelanggan::factory(20)->create();
-
+        Booking::factory(30)->create();
+        BookingArmada::factory(60)->create();
+        Pembayaran::factory(60)->create();
     }
 }
