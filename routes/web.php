@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArmadaController;
+
 //Test
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +19,8 @@ Route::get('/', function () {
     return view('dashboard.index');
 });
 
-Route::get('/armada/', function(){
-    return view('dashboard.armada.index');
-});
-
-Route::get('/armada/create', function(){
-    return view('dashboard.armada.create');
-});
-
+Route::get('/armada/', [ArmadaController::class, 'index']);
+Route::get('/armada/create', [ArmadaController::class, 'create']);
 
 
 // tambahin

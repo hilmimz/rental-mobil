@@ -6,7 +6,7 @@
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
             <li class="sidebar-menu-item active">
-                <a href="index.html">
+                <a href="/">
                     <i class="ri-dashboard-line sidebar-menu-item-icon"></i>
                     Dashboard
                 </a>
@@ -15,31 +15,31 @@
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Master Data</li>
             
                 <li class="sidebar-menu-item">
-                    <a href="#">
+                    <a href="/pelanggan">
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
                             Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#">
+                    <a href="/booking">
                         <i class="ri-coins-line sidebar-menu-item-icon"></i>
                             Data Booking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#">
+                    <a href="/merk">
                         <i class="ri-stack-line sidebar-menu-item-icon"></i>
                             Data Merk                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a href="../crud_armada/table_armada.html">
-                        <i class="ri-car-line sidebar-menu-item-icon"></i>
+                <li class="sidebar-menu-item ">
+                    <a href="/armada">
+                        <i class="ri-car-line sidebar-menu-item-icon "></i>
                             Data Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#">
+                    <a href="/pembayaran">
                         <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
                             Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                     </a>

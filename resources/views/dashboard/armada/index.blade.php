@@ -34,28 +34,32 @@
                 </thead>
                 <tbody>
                     <!-- Selama hasil data ada dari sql  -->
-
+                    
+                    @foreach($armadas as $armada)
                     <tr class="size2 align-middle">
-                        <td>1</td>
-                        <td>Suzuki</td>
-                        <td>Ertiga</td>
-                        <td>AD 11 BH</td>
-                        <td>Matic</td>
-                        <td>12-12-2020</td>
-                        <td>2020</td>
-                        <td>Rp.100.000</td>
-                        <td>Ya</td>
-                        <td>Bensin</td>
+                        <td>{{ $armada->id }}</td>
+                        <td>{{ $armada->merk_id }}</td>
+                        <td>{{ $armada->jenis }}</td>
+                        <td>{{ $armada->plat_nomor }}</td>
+                        <td>{{ $armada->transmisi }}</td>
+                        <td>{{ $armada->tgl_pajak }}</td>
+                        <td>{{ $armada->thn_beli }}</td>
+                        <td>{{ $armada->harga_tiga_jam }}</td>
+                        <td>{{ ($armada->tersedia) ? 'Tersedia boss' : 'Kagak' }}</td>
+                        <td>{{ $armada->bahan_bakar }}</td>
+
                         <td>
-                            {{-- <a href="add.php?ubah=<?php echo $hasil['nomor']; ?>" type="button" class="btn btn-primary btn-sm">
+                            <a href="#" type="button" class="btn btn-primary btn-sm">
                                 <i class="ri-pencil-fill"></i>
                             </a>
                             
-                            <a href="proses.php?hapus=<?php echo $hasil['nomor']; ?>" type="button" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
+                            <a href="#" type="button" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
                                 <i class="ri-delete-bin-fill"></i>
-                            </a> --}}
+                            </a>
                         </td>
                     </tr>
+
+                    @endforeach
 
                 </tbody>
             </table>
