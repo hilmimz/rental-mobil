@@ -14,7 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('dashboard.index');
+});
+
+Route::get('/armada/', function(){
+    return view('dashboard.armada.index');
+});
+
+Route::get('/armada/create', function(){
+    return view('dashboard.armada.create');
 });
 
 

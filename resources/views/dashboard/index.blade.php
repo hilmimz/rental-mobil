@@ -1,14 +1,14 @@
-@extends('layouts.dashboard_template')
+@extends('layouts.dashboard')
 
 @section('content')
     
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <!-- Page Heading -->
+    {{-- <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    </div>
+    </div> --}}
 
     <!-- Content Row -->
     <div class="row">
@@ -220,7 +220,12 @@
 </div>
 <!-- /.container-fluid -->
 
+@endsection
 
-
-
+@section('bottom_links')
+    <!-- start: JS -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <!-- end: JS -->
 @endsection
