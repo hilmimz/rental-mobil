@@ -22,5 +22,4 @@ Route::get('/', function () {
 Route::get('/armada/', [ArmadaController::class, 'index']);
 Route::get('/armada/create', [ArmadaController::class, 'create']);
 
-
 // tambahin
