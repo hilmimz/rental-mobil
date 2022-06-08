@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArmadaController;
+use App\Http\Controllers\MerkController;
 
 //Test
 /*
@@ -22,4 +23,5 @@ Route::get('/', function () {
 Route::get('/armada/', [ArmadaController::class, 'index']);
 Route::get('/armada/create', [ArmadaController::class, 'create']);
 
+Route::resource('merk', MerkController::class);
 // tambahin
