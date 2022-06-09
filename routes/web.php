@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArmadaController;
 use App\Http\Controllers\MerkController;
+use App\Http\Controllers\PelangganController;
 
 //Test
 /*
@@ -24,4 +25,6 @@ Route::get('/armada/', [ArmadaController::class, 'index']);
 Route::get('/armada/create', [ArmadaController::class, 'create']);
 
 Route::resource('merk', MerkController::class);
+Route::resource('pelanggan', PelangganController::class);
+
 // tambahin
