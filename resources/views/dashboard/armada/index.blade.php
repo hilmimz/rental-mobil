@@ -4,14 +4,13 @@
     @include('partials.datatables_upper_links')
 @endsection
 
-
 @section('content')
 <!-- Table  -->
 <div>
     <!-- Typography -->
     <h2 class="mt-3"><center>Data Armada Rental Mobil<center></h2>
     <figure class="text-center"> 
-        <a href="create_armada.html" type="button" class="btn btn-secondary mt-4 shadow-lg">
+        <a href="{{ route('armada.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg">
             Tambahkan Data Armada
         </a>
 
@@ -40,22 +39,27 @@
                         <td>{{ $armada->id }}</td>
                         <td>{{ $armada->merk_id }}</td>
                         <td>{{ $armada->jenis }}</td>
-                        <td>{{ $armada->plat_nomor }}</td>
-                        <td>{{ $armada->transmisi }}</td>
+                        <td>{{ $armada->plat_nomor}}</td>
+                        <td>{{ $armada->transmisi}}</td>
                         <td>{{ $armada->tgl_pajak }}</td>
                         <td>{{ $armada->thn_beli }}</td>
                         <td>{{ $armada->harga_tiga_jam }}</td>
-                        <td>{{ ($armada->tersedia) ? 'Tersedia boss' : 'Kagak' }}</td>
+                        <td>{{ ($armada->tersedia) ? 'Ya' : 'Tidak' }}</td>
                         <td>{{ $armada->bahan_bakar }}</td>
-
                         <td>
-                            <a href="#" type="button" class="btn btn-primary btn-sm">
-                                <i class="ri-pencil-fill"></i>
-                            </a>
-                            
-                            <a href="#" type="button" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
-                                <i class="ri-delete-bin-fill"></i>
-                            </a>
+
+                            <div class="d-flex justify-content-around">
+                                <a href="{{ route('armada.edit', $armada->id) }}" type="button" class="btn btn-primary btn-sm">
+                                    <i class="ri-pencil-fill "></i>
+                                </a>
+                                <form action="{{ route('armada.destroy', $armada->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
+                                        <i class="ri-delete-bin-fill"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
 

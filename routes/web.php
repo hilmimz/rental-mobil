@@ -24,9 +24,7 @@ Route::get('/', function () {
     return view('dashboard.index');
 });
 
-Route::get('/armada/', [ArmadaController::class, 'index']);
-Route::get('/armada/create', [ArmadaController::class, 'create']);
-
+Route::resource('armada', MerkController::class);
 
 Route::resource('merk', MerkController::class);
 
