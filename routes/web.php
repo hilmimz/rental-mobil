@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArmadaController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\BookingController;
+
 
 //Test
 /*
@@ -26,6 +29,12 @@ Route::get('/armada/create', [ArmadaController::class, 'create']);
 
 
 Route::resource('merk', MerkController::class);
+
 Route::resource('pembayaran', PembayaranController::class);
 
+Route::resource('pelanggan', PelangganController::class);
+
+Route::resource('booking', BookingController::class);
+
 // tambahin
+
