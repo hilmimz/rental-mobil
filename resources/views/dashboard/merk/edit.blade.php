@@ -15,13 +15,13 @@
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">Merk :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama" class="form-control" id="nama" autocomplete="off" placeholder="Masukan Merk Armada" value="{{ $merks->nama }}">
+                                <input type="text" name="nama" class="form-control" id="nama" autocomplete="off" placeholder="Masukan Merk Armada" value="{{ $merks->nama }}" required>
                             </div>
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Produsen :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="produsen" class="form-control" id="produsen"  placeholder="Masukkan Nama Produsen" autocomplete="off" value="{{ $merks->produsen }}">
+                                <input type="text" name="produsen" class="form-control" id="produsen"  placeholder="Masukkan Nama Produsen" autocomplete="off" value="{{ $merks->produsen }}" required>
                             </div>
                         </div>
     
