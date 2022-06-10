@@ -5,7 +5,7 @@
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
-            <li class="sidebar-menu-item active">
+            <li class="sidebar-menu-item {{ Request::is('/') ? 'active' : '' }}">
                 <a href="/">
                     <i class="ri-dashboard-line sidebar-menu-item-icon"></i>
                     Dashboard
@@ -14,37 +14,37 @@
             <!-- master data -->
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Master Data</li>
             
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ Request::is('pelanggan') ? 'active' : '' }}">
                     <a href="/pelanggan">
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
                             Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ Request::is('booking') ? 'active' : '' }}">
                     <a href="/booking">
                         <i class="ri-coins-line sidebar-menu-item-icon"></i>
                             Data Booking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ Request::is('merk') ? 'active' : '' }}">
                     <a href="/merk">
                         <i class="ri-stack-line sidebar-menu-item-icon"></i>
                             Data Merk                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
                 </li>
-                <li class="sidebar-menu-item ">
+                <li class="sidebar-menu-item {{ Request::is('armada') ? 'active' : '' }}">
                     <a href="/armada">
                         <i class="ri-car-line sidebar-menu-item-icon "></i>
                             Data Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
                     <a href="/pembayaran">
                         <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
                             Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ Request::is('booking_armada') ? 'active' : '' }}">
                     <a href="/booking_armada">
                         <i class="ri-bill-line sidebar-menu-item-icon"></i>
                             Data Booking Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

@@ -12,12 +12,13 @@ class BookingArmada extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
+    
+    public function booking(){
+        return $this->belongsTo(Booking::class);
+    }
+    
     public function armada(){
         return $this->belongsTo(Armada::class);
     }
 
-    public function booking(){
-        return $this->belongsTo(Booking::class);
-    }
 }

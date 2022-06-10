@@ -46,21 +46,20 @@
                     <tr class="size2 align-middle">
                         {{-- <td>{{ $loop->iteration }}</td> --}}
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $bookingArmada->booking_id }}</td>
-                        <td>{{ $bookingArmada->armada_id }}</td>
+                        <td>{{ $bookingArmada->booking->no_invoice }}</td>
+                        <td>{{ $bookingArmada->armada->plat_nomor }}</td>
                         <td>{{ $bookingArmada->waktu_mulai}}</td>
                         <td>{{ $bookingArmada->waktu_selesai}}</td>
                         <td>{{ $bookingArmada->durasi_jam }}</td>
                         <td>{{ $bookingArmada->harga }}</td>
                         <td>{{ $bookingArmada->status }}</td>
                         <td>
-
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('booking_armada.edit', $bookingArmada->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
                                 </a>
                                 <a href="{{ route('booking_armada.show', $bookingArmada->id) }}" type="button" class="btn btn-info btn-sm">
-                                    <i class="ri-pencil-fill "></i>
+                                    <i class="ri-eye-line "></i>
                                 </a>
                                 <form action="{{ route('booking_armada.destroy', $bookingArmada->id) }}" method="POST">
                                     @csrf

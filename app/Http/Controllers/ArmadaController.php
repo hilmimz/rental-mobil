@@ -83,19 +83,40 @@ class ArmadaController extends Controller
      */
     public function update(Request $request, Armada $armada)
     {
-        $armada->update([
-            'merk_id' => $request->get('merk_id'),
-            'jenis' => $request->get('jenis'),
-            'plat_nomor' => $request->get('plat_nomor'),
-            'transmisi' => $request->get('transmisi'),
-            'tgl_pajak' => $request->get('tgl_pajak'),
-            'thn_beli' => $request->get('thn_beli'),
-            'harga_tiga_jam' => $request->get('harga_tiga_jam'),
-            'tersedia' => $request->get('tersedia'),
-            'bahan_bakar' => $request->get('bahan_bakar')
-        ]);
+        $rules = [
+            'jenis' => 'required',
+            'plat_nomor' => 'required',
+            'transmisi' => 'required',
+            'tgl_pajak' => 'required',
+            'thn_beli' => 'required',
+            'harga_tiga_jam' => 'required',
+            'tersedia' => 'required',
+            'bahan_bakar' => 'required'
+        ];
 
+        // cek kalo value plat_nomor diedit dengan cara bandingin value plat_nomor
+        // versi form sama versi data aslinya. Kalo beda berarti diedit
+        if($request->plat_nomor != $armada->plat_nomor){
+            $rules['plat_nomor'] = $rules['plat_nomor'] . '|unique:armadas'; // tambahin rule biar value harus unique berdasarkan tabel armadas
+        }
+
+        $validatedRequest = $request->validate($rules);
+
+        Armada::where('id', $armada->id)->update($validatedRequest);
         return redirect (route ('armada.index'));
+
+        // $armada->update([
+        //     'merk_id' => $request->get('merk_id'),
+        //     'jenis' => $request->get('jenis'),
+        //     'plat_nomor' => $request->get('plat_nomor'),
+        //     'transmisi' => $request->get('transmisi'),
+        //     'tgl_pajak' => $request->get('tgl_pajak'),
+        //     'thn_beli' => $request->get('thn_beli'),
+        //     'harga_tiga_jam' => $request->get('harga_tiga_jam'),
+        //     'tersedia' => $request->get('tersedia'),
+        //     'bahan_bakar' => $request->get('bahan_bakar')
+        // ]);
+
     }
 
     /**
