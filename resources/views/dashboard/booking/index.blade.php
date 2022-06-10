@@ -20,8 +20,8 @@
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
                         <th>ID</th>
-                        <th style="width: 12%;">Tgl Transkasi</th>
                         <th style="width: 12%;">Pelanggan_id</th>
+                        <th style="width: 12%;">Tgl Transkasi</th>
                         <th style="width: 10%;">Harga Total</th>
                         <th style="width: 11%;">Status</th>
                         <th style="width: 11%;">No Invoice</th>

@@ -20,7 +20,7 @@
                                     id="booking_id" autocomplete="off" placeholder="Masukan Booking ID" value="{{ old('booking_id', $booking_armada->booking_id) }}">
                             </div>
                             @error('booking_id')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div> 
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>

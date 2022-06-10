@@ -16,7 +16,7 @@ class BookingArmadaController extends Controller
     {
         return view('dashboard.booking_armada.index',[
             // 'bookingArmadas' => BookingArmada::with('booking')->get()
-            'bookingArmadas' => BookingArmada::all()
+            'bookingArmadas' => BookingArmada::with(['armada', 'booking'])->get()
         ]);
     }
 
@@ -64,7 +64,9 @@ class BookingArmadaController extends Controller
      */
     public function show(BookingArmada $bookingArmada)
     {
-        //
+        return view('dashboard.booking_armada.detail', [
+            'booking_armada' => $bookingArmada
+        ]);
     }
 
     /**
@@ -115,7 +117,7 @@ class BookingArmadaController extends Controller
      */
     public function destroy(BookingArmada $bookingArmada)
     {
-        BookingArmada::destroy($bookingArmada);
+        $bookingArmada->delete();
         return redirect(route('booking_armada.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }

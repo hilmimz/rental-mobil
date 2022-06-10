@@ -40,8 +40,6 @@
                             @enderror
                         </div>
 
-                        
-
 
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Waktu Mulai :</label>

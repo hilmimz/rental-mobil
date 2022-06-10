@@ -28,7 +28,7 @@
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
-                        <th>ID</th>
+                        <th>#</th>
                         <th >Nomor Invoice</th>
                         <th >Plat Nomor Armada</th>
                         <th>Waktu Mulai</th>
@@ -44,9 +44,10 @@
                     
                     @foreach($bookingArmadas as $bookingArmada)
                     <tr class="size2 align-middle">
-                        <td>{{ $bookingArmada->id }}</td>
-                        <td>{{ $bookingArmada->booking->no_invoice }}</td>
-                        <td>{{ $bookingArmada->armada->plat_nomor }}</td>
+                        {{-- <td>{{ $loop->iteration }}</td> --}}
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $bookingArmada->booking_id }}</td>
+                        <td>{{ $bookingArmada->armada_id }}</td>
                         <td>{{ $bookingArmada->waktu_mulai}}</td>
                         <td>{{ $bookingArmada->waktu_selesai}}</td>
                         <td>{{ $bookingArmada->durasi_jam }}</td>
@@ -56,6 +57,9 @@
 
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('booking_armada.edit', $bookingArmada->id) }}" type="button" class="btn btn-primary btn-sm">
+                                    <i class="ri-pencil-fill "></i>
+                                </a>
+                                <a href="{{ route('booking_armada.show', $bookingArmada->id) }}" type="button" class="btn btn-info btn-sm">
                                     <i class="ri-pencil-fill "></i>
                                 </a>
                                 <form action="{{ route('booking_armada.destroy', $bookingArmada->id) }}" method="POST">

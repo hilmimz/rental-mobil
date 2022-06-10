@@ -37,7 +37,7 @@
                     @foreach($armadas as $armada)
                     <tr class="size2 align-middle">
                         <td>{{ $armada->id }}</td>
-                        <td>{{ $armada->merk_id }}</td>
+                        <td>{{ $armada->merk->nama }}</td>
                         <td>{{ $armada->jenis }}</td>
                         <td>{{ $armada->plat_nomor}}</td>
                         <td>{{ $armada->transmisi}}</td>

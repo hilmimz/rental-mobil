@@ -14,7 +14,7 @@ class ArmadaController extends Controller
      */
     public function index()
     {   
-        $armadas = Armada::all();
+        $armadas = Armada::with('merk')->get();
         return view('dashboard.armada.index', compact('armadas'));
     }
 
