@@ -44,6 +44,12 @@
                             Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                     </a>
                 </li>
+                <li class="sidebar-menu-item">
+                    <a href="/booking_armada">
+                        <i class="ri-bill-line sidebar-menu-item-icon"></i>
+                            Data Booking Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                    </a>
+                </li>
             
             <!-- end master -->
 

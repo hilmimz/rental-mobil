@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tgl_transaksi');
             $table->integer('harga_total');
             $table->string('status', 20);
-            $table->string('no_invoice', 20);
+            $table->string('no_invoice', 20)->unique();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

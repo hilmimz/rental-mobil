@@ -35,7 +35,7 @@ class BookingArmadaFactory extends Factory
 
         return [
             'booking_id' => $this->faker->numberBetween(1,30),
-            'pelanggan_id' => $this->faker->numberBetween(1,20),
+            'armada_id' => $this->faker->numberBetween(1,30),
             'waktu_selesai' => $waktu_selesai,
             'waktu_mulai' => $waktu_mulai,
             'durasi_jam' => $durasi_total,

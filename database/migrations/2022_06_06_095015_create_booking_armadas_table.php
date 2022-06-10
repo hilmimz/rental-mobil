@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('booking_armadas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id');
-            $table->foreignId('pelanggan_id');
+            $table->foreignId('armada_id');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_selesai');
             $table->integer('durasi_jam');
