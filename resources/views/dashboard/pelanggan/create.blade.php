@@ -18,42 +18,78 @@
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">NIK :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nik" class="form-control" id="nik" autocomplete="off" placeholder="Masukkan NIK">
+                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" autocomplete="off" placeholder="Masukkan NIK" value="{{ old('nik') }}">
                             </div>
+                            @error('nik')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Nama :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama" class="form-control" id="nama"  placeholder="Masukkan Nama" autocomplete="off">
+                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama"  placeholder="Masukkan Nama" autocomplete="off" value="{{ old('nama') }}">
                             </div>
+                            @error('nama')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Gender :</label>
                             <div class="col-sm-10">
-                            <select class="form-select" name="jenis_kelamin" id="jenis_kelamin" aria-label="Default select example">
-                                    <option selected>Pilih...</option>
-                                    <option value="L">L</option>
-                                    <option value="P">P</option>
+                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin" aria-label="Default select example">
+                                    <option @if(!old('status')) selected @endif value="">Pilih...</option>
+                                    <option @if(old('status') == "Selesai") selected @endif value="L">L</option>
+                                    <option @if(old('status') == "Aktif") selected @endif value="P">P</option>
                                 </select>
                             </div>
+                            @error('jenis_kelamin')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Tgl Lahir :</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir"  placeholder="Masukkan Tanggal Lahir" autocomplete="off">
+                                <input type="date" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"  placeholder="Masukkan Tanggal Lahir" autocomplete="off" value="{{ old('tgl_lahir') }}">
                             </div>
+                            @error('tgl_lahir')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Alamat :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="alamat" class="form-control" id="alamat"  placeholder="Masukkan Alamat" autocomplete="off">
+                                <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat"  placeholder="Masukkan Alamat" autocomplete="off" value="{{ old('alamat') }}">
                             </div>
+                            @error('alamat')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">No Telp :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_telepon" class="form-control" id="no_telepon"  placeholder="Masukkan No. Telp" autocomplete="off">
+                                <input type="text" name="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" id="no_telepon"  placeholder="Masukkan No. Telp" autocomplete="off" value="{{ old('no_telepon') }}">
                             </div>
+                            @error('no_telepon')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
     
                         <div class="mb-3 row mt-4">
