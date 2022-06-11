@@ -52,8 +52,8 @@
                             <label for="" class="col-sm-2 col-form-label">Cara Pembayaran :</label>
                             <div class="col-sm-10">
                                 <select class="form-select mt-3 @error('cara_pembayaran') is-invalid @enderror" aria-label="Default select example" name="cara_pembayaran" class="form-control" id="cara_pembayaran">
-                                    <option @if(old('cara_pembayaran') == "Transfer") selected @endif value="Transfer">Transfer</option>
-                                    <option @if(old('cara_pembayaran') == "Cash") selected @endif value="Cash">Cash</option>
+                                    <option @if(old('cara_pembayaran') == "Transfer" || $pembayarans->cara_pembayaran == "Transfer") selected @endif value="Transfer">Transfer</option>
+                                    <option @if(old('cara_pembayaran') == "Cash" || $pembayarans->cara_pembayaran == "Cash") selected @endif value="Cash">Cash</option>
                                 </select>
                             </div>
                             @error('cara_pembayaran')
@@ -67,8 +67,8 @@
                             <label for="" class="col-sm-2 col-form-label">Tipe Pembayaran :</label>
                             <div class="col-sm-10">
                                 <select class="form-select mt-3 @error('tipe_pembayaran') is-invalid @enderror" aria-label="Default select example" name="tipe_pembayaran" class="form-control" id="tipe_pembayaran">   
-                                    <option @if(old('tipe_pembayaran') == "DP") selected @endif value="DP">DP</option>
-                                    <option @if(old('tipe_pembayaran') == "Pelunasan") selected @endif value="Pelunasan">Pelunasan</option>
+                                    <option @if(old('tipe_pembayaran') == "DP" || $pembayarans->tipe_pembayaran == "DP") selected @endif value="DP">DP</option>
+                                    <option @if(old('tipe_pembayaran') == "Pelunasan" || $pembayarans->tipe_pembayaran == "Pelunasan" ) selected @endif value="Pelunasan">Pelunasan</option>
                                 </select>
                             </div>
                             @error('tipe_pembayaran')

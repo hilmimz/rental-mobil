@@ -42,8 +42,8 @@ class PembayaranController extends Controller
             'booking_id' => 'required',
             'tgl_pembayaran' => 'required',
             'jumlah_bayar' => 'required|integer|min:2',    
-            'cara_pembayaran' => "required",
-            'tipe_pembayaran' => 'required|integer|min:1',
+            'cara_pembayaran' => 'required',
+            'tipe_pembayaran' => 'required',
         ];
 
         $validatedRequest = $request->validate($rules);
@@ -89,9 +89,9 @@ class PembayaranController extends Controller
         $rules = [
             'booking_id' => 'required',
             'tgl_pembayaran' => 'required',
-            'jumlah_bayar' => 'required|integer|min:2',    
-            'cara_pembayaran' => "required",
-            'tipe_pembayaran' => 'required|integer|min:1',
+            'jumlah_bayar' => 'required|integer|min:3',    
+            'cara_pembayaran' => 'required',
+            'tipe_pembayaran' => 'required',
         ];
 
         $validatedRequest = $request->validate($rules);
