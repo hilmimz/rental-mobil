@@ -15,14 +15,26 @@
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">Merk :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nama" class="form-control" id="nama" autocomplete="off" placeholder="Masukan Merk Armada" value="{{ $merks->nama }}" required>
+                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" autocomplete="off" placeholder="Masukan Merk Armada" value="{{ old('nama', $merks->nama) }}"" >
                             </div>
+                            @error('nama')
+                                <div class="col-sm-2"></div> 
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Produsen :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="produsen" class="form-control" id="produsen"  placeholder="Masukkan Nama Produsen" autocomplete="off" value="{{ $merks->produsen }}" required>
+                                <input type="text" name="produsen" class="form-control @error('produsen') is-invalid @enderror" id="produsen"  placeholder="Masukkan Nama Produsen" autocomplete="off" value="{{ old('produsen', $merks->produsen) }}">
                             </div>
+                            @error('produsen')
+                                <div class="col-sm-2"></div> 
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
     
                         <div class="mb-3 row mt-4">

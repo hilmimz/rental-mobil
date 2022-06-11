@@ -6,6 +6,16 @@
 
 
 @section('content')
+
+@if(session()->has('success_create'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_create') }}</div>
+@elseif(session()->has('success_edit'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
+@elseif(session()->has('success_remove'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
+@endif
+
+
 <!-- Table  -->
 <div>
     <!-- Typography -->
@@ -19,7 +29,7 @@
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Merk</th>
                         <th>Produsen</th>
                         <th style="width: 10%;">Aksi</th>
@@ -30,7 +40,7 @@
                     
                     @foreach($merks as $merk)
                     <tr class="size2 align-middle">
-                        <td >{{ $merk->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $merk->nama }}</td>
                         <td>{{ $merk->produsen }}</td>
 
@@ -38,6 +48,9 @@
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('merk.edit', $merk->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
+                                </a>
+                                <a href="{{ route('merk.show', $merk->id) }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="ri-eye-line "></i>
                                 </a>
                                 <form action="{{ route('merk.destroy', $merk->id) }}" method="POST">
                                     @csrf

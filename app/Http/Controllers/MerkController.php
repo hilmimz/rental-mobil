@@ -36,12 +36,16 @@ class MerkController extends Controller
      */
     public function store(Request $request)
     {
-        $merks = Merk::create([
-            'nama' => $request->get('nama'),
-            'produsen' => $request->get('produsen'),
-        ]);
+        $rules = [
+            'nama' => 'required',
+            'produsen' => 'required'
+        ];
 
-        return redirect(route('merk.index'));
+        $validatedRequest = $request->validate($rules);
+
+        $merks = Merk::create($validatedRequest);
+
+        return redirect(route('merk.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
     /**
@@ -50,9 +54,11 @@ class MerkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Merk $merk)
     {
-        //
+        return view('dashboard.merk.detail', [
+            'merk' => $merk
+        ]);
     }
 
     /**
@@ -76,12 +82,16 @@ class MerkController extends Controller
      */
     public function update(Request $request, Merk $merk)
     {   
-        $merk->update([
-            'nama' => $request->get('nama'),
-            'produsen' => $request->get('produsen')
-        ]);
+        $rules = [
+            'nama' => 'required',
+            'produsen' => 'required'
+        ];
 
-        return redirect (route ('merk.index'));
+        $validatedRequest = $request->validate($rules);
+
+        $merk->update($validatedRequest);
+
+        return redirect (route ('merk.index'))->with('success_edit', 'Data has been edited succesfully!');
     }
 
     /**
@@ -93,6 +103,6 @@ class MerkController extends Controller
     public function destroy(Merk $merk)
     {
         $merk->delete();
-        return redirect (route('merk.index'));
+        return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
