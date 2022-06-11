@@ -13,34 +13,70 @@
                         @csrf
                         {{-- <input type="hidden" value="{{ $nomor }}" name="nomor"> --}}
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Booking ID :</label>
+                        <label for="" class="col-sm-2 col-form-label">Booking ID :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="booking_id" class="form-control" id="booking_id" autocomplete="off" placeholder="Masukan ID Booking" value="{{ $pembayarans->booking_id }}">
+                                <input type="text" name="booking_id" class="form-control @error('booking_id') is-invalid @enderror" id="booking_id" autocomplete="off" placeholder="Masukan ID Booking" value="{{ old('booking_id', $pembayarans->booking_id) }}">
                             </div>
+                            @error('booking_id')
+                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">Tanggal Pembayaran :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="tgl_pembayaran" class="form-control" id="tgl_pembayaran" autocomplete="off" placeholder="Masukan Tanggal Pembayaran" value="{{ $pembayarans->tgl_pembayaran }}">
+                                <input type="date" name="tgl_pembayaran" class="form-control mt-3 @error('tgl_pembayaran') is-invalid @enderror" id="tgl_pembayaran" autocomplete="off" placeholder="Masukan Tanggal Pembayaran" value="{{ old('tgl_pembayaran', $pembayarans->tgl_pembayaran) }}">
                             </div>
+                            @error('tgl_pembayaran')
+                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Jumlah Bayar :</label>
+                        <label for="" class="col-sm-2 col-form-label">Jumlah Bayar :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="jumlah_bayar" class="form-control" id="jumlah_bayar"  placeholder="Masukkan Jumlah Bayar" autocomplete="off" value="{{ $pembayarans->jumlah_bayar }}">
+                                <input type="text" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" id="jumlah_bayar"  placeholder="Masukkan Jumlah Bayar" autocomplete="off" value="{{ old('jumlah_bayar', $pembayarans->jumlah_bayar) }}">
                             </div>
+                            @error('jumlah_bayar')
+                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Cara Pembayaran :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="cara_pembayaran" class="form-control" id="cara_pembayaran"  placeholder="Masukkan Cara Pembayaran" autocomplete="off" value="{{ $pembayarans->cara_pembayaran }}">
+                                <select class="form-select mt-3 @error('cara_pembayaran') is-invalid @enderror" aria-label="Default select example" name="cara_pembayaran" class="form-control" id="cara_pembayaran">
+                                    <option @if(old('cara_pembayaran') == "Transfer") selected @endif value="Transfer">Transfer</option>
+                                    <option @if(old('cara_pembayaran') == "Cash") selected @endif value="Cash">Cash</option>
+                                </select>
                             </div>
+                            @error('cara_pembayaran')
+                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Tipe Pembayaran :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="tipe_pembayaran" class="form-control" id="tipe_pembayaran"  placeholder="Masukkan Tipe Pembayaran" autocomplete="off" value="{{ $pembayarans->tipe_pembayaran }}">
+                                <select class="form-select mt-3 @error('tipe_pembayaran') is-invalid @enderror" aria-label="Default select example" name="tipe_pembayaran" class="form-control" id="tipe_pembayaran">   
+                                    <option @if(old('tipe_pembayaran') == "DP") selected @endif value="DP">DP</option>
+                                    <option @if(old('tipe_pembayaran') == "Pelunasan") selected @endif value="Pelunasan">Pelunasan</option>
+                                </select>
                             </div>
+                            @error('tipe_pembayaran')
+                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3 row mt-4">
