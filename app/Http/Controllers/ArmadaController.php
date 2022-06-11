@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Armada;
+use App\Models\Merk;
 use Illuminate\Http\Request;
 
 class ArmadaController extends Controller
@@ -25,7 +26,8 @@ class ArmadaController extends Controller
      */
     public function create()
     {
-        return view('dashboard.armada.create');
+        $merks = Merk::all();
+        return view('dashboard.armada.create', compact('merks'));
     }
 
     /**
@@ -36,19 +38,23 @@ class ArmadaController extends Controller
      */
     public function store(Request $request)
     {
-        $armada = Armada::create([
-            'merk_id' => $request->get('merk_id'),
-            'jenis' => $request->get('jenis'),
-            'plat_nomor' => $request->get('plat_nomor'),
-            'transmisi' => $request->get('transmisi'),
-            'tgl_pajak' => $request->get('tgl_pajak'),
-            'thn_beli' => $request->get('thn_beli'),
-            'harga_tiga_jam' => $request->get('harga_tiga_jam'),
-            'tersedia' => $request->get('tersedia'),
-            'bahan_bakar' => $request->get('bahan_bakar'),
-        ]);
+        $rules = [
+            'merk_id' => 'required',
+            'jenis' => 'required',
+            'plat_nomor' => 'required',    
+            // 'waktu_selesai' => "required|gt:$request->waktu_mulai", diputer jir format waktunya jadi ngaco
+            'transmisi' => "required",
+            'tgl_pajak' => 'required',
+            'thn_beli' => 'required|integer',
+            'harga_tiga_jam' => 'required|integer',
+            'tersedia' => 'required',  
+            'bahan_bakar' => 'required'   
+        ];
 
-        return redirect(route('armada.index'));
+        $validatedRequest = $request->validate($rules);
+        $armada = Armada::create($validatedRequest);
+
+        return redirect(route('armada.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
     /**
@@ -59,7 +65,8 @@ class ArmadaController extends Controller
      */
     public function show(Armada $armada)
     {
-        //
+        $armadas = Armada::with('merk')->get();
+        return view('dashboard.armada.detail', compact('armada'));
     }
 
     /**
@@ -70,8 +77,8 @@ class ArmadaController extends Controller
      */
     public function edit(Armada $armada)
     {
-        
-        return view('dashboard.armada.edit', compact('armada'));
+        $merks = Merk::all();
+        return view('dashboard.armada.edit', compact(['armada', 'merks']));
     }
 
     /**
@@ -88,8 +95,8 @@ class ArmadaController extends Controller
             'plat_nomor' => 'required',
             'transmisi' => 'required',
             'tgl_pajak' => 'required',
-            'thn_beli' => 'required',
-            'harga_tiga_jam' => 'required',
+            'thn_beli' => 'required|integer',
+            'harga_tiga_jam' => 'required|integer',
             'tersedia' => 'required',
             'bahan_bakar' => 'required'
         ];
@@ -103,7 +110,7 @@ class ArmadaController extends Controller
         $validatedRequest = $request->validate($rules);
 
         Armada::where('id', $armada->id)->update($validatedRequest);
-        return redirect (route ('armada.index'));
+        return redirect (route ('armada.index'))->with('success_edit', 'Data has been edited succesfully!');
 
         // $armada->update([
         //     'merk_id' => $request->get('merk_id'),
@@ -128,6 +135,6 @@ class ArmadaController extends Controller
     public function destroy(Armada $armada)
     {
         $armada->delete();
-        return redirect (route('armada.index'));
+        return redirect (route('armada.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
