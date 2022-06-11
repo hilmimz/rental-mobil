@@ -5,6 +5,14 @@
 @endsection
 
 @section('content')
+
+@if(session()->has('success_create'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_create') }}</div>
+@elseif(session()->has('success_edit'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
+@elseif(session()->has('success_remove'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
+@endif
 <!-- Table  -->
 <div>
     <!-- Typography -->
@@ -18,7 +26,7 @@
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Booking ID</th>
                         <th>Tgl Pembayaran</th>
                         <th>Jumlah Bayar</th>
@@ -32,8 +40,8 @@
                     
                     @foreach($pembayarans as $pembayaran)
                     <tr class="size2 align-middle">
-                        <td>{{ $pembayaran->id }}</td>
-                        <td>{{ $pembayaran->booking_id }}</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pembayaran->booking->no_invoice }}</td>
                         <td>{{ $pembayaran->tgl_pembayaran }}</td>
                         <td>{{ $pembayaran->jumlah_bayar }}</td>
                         <td>{{ $pembayaran->cara_pembayaran }}</td>
@@ -42,6 +50,9 @@
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
+                                </a>
+                                <a href="{{ route('pembayaran.show', $pembayaran->id) }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="ri-eye-line "></i>
                                 </a>
                                 <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST">
                                     @csrf

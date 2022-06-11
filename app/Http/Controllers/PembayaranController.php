@@ -14,8 +14,10 @@ class PembayaranController extends Controller
      */
     public function index()
     {   
-        $pembayarans = Pembayaran::all();
-        return view ('dashboard.pembayaran.index', compact('pembayarans'));
+        return view('dashboard.pembayaran.index',[
+            // 'bookingArmadas' => BookingArmada::with('booking')->get()
+            'pembayarans' => Pembayaran::with(['booking'])->get()
+        ]);
     }
 
     /**
@@ -36,15 +38,18 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $pembayarans = Pembayaran::create([
-            'booking_id' => $request->get('booking_id'),
-            'tgl_pembayaran' => $request->get('tgl_pembayaran'),
-            'jumlah_bayar' => $request->get('jumlah_bayar'),
-            'cara_pembayaran' => $request->get('cara_pembayaran'),
-            'tipe_pembayaran' => $request->get('tipe_pembayaran'),
-        ]);
+        $rules = [
+            'booking_id' => 'required',
+            'tgl_pembayaran' => 'required',
+            'jumlah_bayar' => 'required|integer|min:2',    
+            'cara_pembayaran' => "required",
+            'tipe_pembayaran' => 'required|integer|min:1',
+        ];
 
-        return redirect(route('pembayaran.index'));
+        $validatedRequest = $request->validate($rules);
+        BookingArmada::create($validatedRequest);
+
+        return redirect(route('pembayaran.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
     /**
@@ -53,9 +58,11 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pembayaran $pembayaran)
     {
-        //
+        return view('dashboard.pembayaran.detail', [
+            'pembayaran' => $pembayaran
+        ]);
     }
 
     /**
@@ -79,15 +86,18 @@ class PembayaranController extends Controller
      */
     public function update(Request $request, Pembayaran $pembayaran)
     {   
-        $pembayaran->update([
-            'booking_id' => $request->get('booking_id'),
-            'tgl_pembayaran' => $request->get('tgl_pembayaran'),
-            'jumlah_bayar' => $request->get('jumlah_bayar'),
-            'cara_pembayaran' => $request->get('cara_pembayaran'),
-            'tipe_pembayaran' => $request->get('tipe_pembayaran'),
-        ]);
+        $rules = [
+            'booking_id' => 'required',
+            'tgl_pembayaran' => 'required',
+            'jumlah_bayar' => 'required|integer|min:2',    
+            'cara_pembayaran' => "required",
+            'tipe_pembayaran' => 'required|integer|min:1',
+        ];
 
-        return redirect (route ('pembayaran.index'));
+        $validatedRequest = $request->validate($rules);
+        Pembayaran::where('id', $pembayaran->id)->update($validatedRequest);
+
+        return redirect (route ('pembayaran.index'))->with('success_edit', 'Data has been edited succesfully!');
     }
 
     /**
@@ -99,6 +109,6 @@ class PembayaranController extends Controller
     public function destroy(Pembayaran $pembayaran)
     {
         $pembayaran->delete();
-        return redirect (route('pembayaran.index'));
+        return redirect (route('pembayaran.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
