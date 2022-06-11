@@ -5,6 +5,14 @@
 @endsection
 
 @section('content')
+
+@if(session()->has('success_create'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_create') }}</div>
+@elseif(session()->has('success_edit'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
+@elseif(session()->has('success_remove'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
+@endif
     
 <!-- Begin Page Content -->
 <div>
@@ -19,10 +27,10 @@
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>NIK</th>
                         <th>Nama</th>
-                        <th style="width:11%;">Gender</th>
+                        <th style="width:9%;">Gender</th>
                         <th style="width:14%;">Tgl Lahir</th>
                         <th style="width:15%;">Alamat</th>
                         <th>No Telp</th>
@@ -34,7 +42,7 @@
                     
                     @foreach($pelanggans as $pelanggan)
                     <tr class="size2 align-middle">
-                        <td>{{ $pelanggan->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $pelanggan->nik }}</td>
                         <td>{{ $pelanggan->nama }}</td>
                         <td>{{ $pelanggan->jenis_kelamin }}</td>
@@ -45,6 +53,9 @@
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
+                                </a>
+                                <a href="{{ route('pelanggan.show', $pelanggan->id) }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="ri-eye-line "></i>
                                 </a>
                                 <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST">
                                     @csrf

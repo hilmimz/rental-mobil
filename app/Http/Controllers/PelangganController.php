@@ -26,6 +26,7 @@ class PelangganController extends Controller
     public function create()
     {
         return view('dashboard.pelanggan.create');
+        
     }
 
     /**
@@ -36,71 +37,80 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        $pelanggans = Pelanggan::create([
-            'nik' => $request->get('nik'),
-            'nama' => $request->get('nama'),
-            'jenis_kelamin' => $request->get('jenis_kelamin'),
-            'tgl_lahir' => $request->get('tgl_lahir'),
-            'alamat' => $request->get('alamat'),
-            'no_telepon' => $request->get('no_telepon')
-        ]);
+        $rules = [
+            'nik' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required',
+            'alamat' => 'required',
+            'no_telepon' => 'required'
+        ];
+        $validateRequest = $request->validate($rules);
 
-        return redirect(route('pelanggan.index'));
+        Pelanggan::create($validatedRequest);
+
+        return redirect(route('pelanggan.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggan $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pelanggan $pelanggan)
     {
-        //
+        return view('dashboard.pelanggan.detail', [
+            'pelanggan' => $pelanggan
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggan  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pelanggan $pelanggan)
     {
-        $pelanggans = Pelanggan::find($id);
-        return view('dashboard.pelanggan.edit', compact('pelanggans'));
+        return view('dashboard.pelanggan.edit', ['pelanggan' => $pelanggan
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Pelanggan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pelanggan $pelanggan)
     {   
-        $pelanggan->update([
-            'nik' => $request->get('nik'),
-            'nama' => $request->get('nama'),
-            'jenis_kelamin' => $request->get('jenis_kelamin'),
-            'tgl_lahir' => $request->get('tgl_lahir'),
-            'alamat' => $request->get('alamat'),
-            'no_telepon' => $request->get('no_telepon')
-        ]);
+        $rules = [
+            'nik' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required',
+            'alamat' => 'required',
+            'no_telepon' => 'required'
+        ];
+        $validateRequest = $request->validate($rules);
 
-        return redirect (route ('pelanggan.index'));
+        Pelanggan::where('id', $pelanggan->id)->update($validatedRequest);
+
+        return redirect (route ('pelanggan.index'))->with('success_edit', 'Data has been edited succesfully!');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggan
      * @return \Illuminate\Http\Response
      */
     public function destroy(Pelanggan $pelanggan)
     {
         $pelanggan->delete();
-        return redirect (route('pelanggan.index'));
+        return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been remove succesfully!');
     }
 }
