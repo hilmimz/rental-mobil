@@ -39,16 +39,20 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        Booking::create([
-            'pelanggan_id' => $request->pelanggan_id,
-            'tgl_transaksi' => $request->tgl_transaksi,
-            'harga_total' => $request->harga_total,
-            'status' => $request->status,
-            'no_invoice' => $request->no_invoice,
-            'keterangan' => $request->keterangan,
-        ]);
+       $rules = [
+        'pelanggan_id' => 'required',
+        'tgl_transaksi' => 'required',
+        'harga_total' => 'required',
+        'status' => 'required',
+        'no_invoice' => 'required',
+        'keterangan' => 'required'
+       ];
 
-        return redirect(route('booking.index'));
+       $validateRequest = $request->validate($rules);
+
+        $bookings = Booking::create($validateRequest);
+
+        return redirect(route('booking.index'))->with('success_create', 'Data has been added sucessfully!');
     }
 
     /**
@@ -57,9 +61,12 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Booking $booking)
     {
         //
+        return view('dashboard.booking.detail', [
+            'booking' => $booking
+        ]);
     }
 
     /**
@@ -84,17 +91,23 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        $booking->update([
-            'pelanggan_id' => $request->pelanggan_id,
-            'tgl_transaksi' => $request->tgl_transaksi,
-            'harga_total' => $request->harga_total,
-            'status' => $request->status,
-            'no_invoice' => $request->no_invoice,
-            'keterangan' => $request->keterangan,
-        ]);
+        $rules = [
+            'pelanggan_id' => 'required',
+            'tgl_transaksi' => 'required',
+            'harga_total' => 'required',
+            'status' => 'required',
+            'no_invoice' => 'required',
+            'keterangan' => 'required'
+           ];
+    
+           $validateRequest = $request->validate($rules);
+    
+            $booking ->update($validateRequest);
+    
+            return redirect(route('booking.index'))->with('success_edit', 'Data has been edited sucessfully!');
+        }
+        
 
-        return redirect (route ('booking.index'));
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +118,6 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         $booking->delete();
-        return redirect (route('booking.index'));
+        return redirect (route('booking.index'))->with('success_remove', 'data has been removed succesfully!');
     }
 }

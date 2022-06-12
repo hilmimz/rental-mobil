@@ -6,6 +6,15 @@
 
 
 @section('content')
+
+@if(session()->has('success_create'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_create') }}</div>
+@elseif(session()->has('success_edit'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
+@elseif(session()->has('success_remove'))
+    <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
+@endif
+
 <!-- Table  -->
 <div>
     <!-- Typography -->
@@ -19,7 +28,7 @@
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
-                        <th>ID</th>
+                        <th>#</th>
                         <th style="width: 12%;">Pelanggan_id</th>
                         <th style="width: 12%;">Tgl Transkasi</th>
                         <th style="width: 10%;">Harga Total</th>
@@ -34,7 +43,7 @@
                     
                     @foreach($bookings as $booking)
                     <tr class="size2 align-middle">
-                        <td>{{ $booking->id }}</td>
+                        <td>{{ $loop->iteration}}</td>
                         <td>{{ $booking->pelanggan_id }}</td>
                         <td>{{ $booking->tgl_transaksi }}</td>
                         <td>{{ $booking->harga_total}}</td>
@@ -46,6 +55,9 @@
                             <div class="d-flex justify-content-around">
                                 <a href="{{ route('booking.edit', $booking->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
+                                </a>
+                                <a href="{{ route('booking.show', $booking->id) }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="ri-eye-line "></i>
                                 </a>
                                 <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                     @csrf
