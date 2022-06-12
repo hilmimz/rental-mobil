@@ -19,7 +19,7 @@
                                 <select class="form-select  @error('merk_id') is-invalid @enderror" aria-label="Default select example" name="merk_id">
                                     <option @if(!old('merk_id')) selected @endif >Pilih Merk</option>
                                     @foreach ($merks as $merk)
-                                    <option @if(old('merk_id') == "{{ $merk->id }}") selected @endif value="{{ $merk->id }}">{{ $merk->nama }}</option>
+                                    <option @if(old('merk_id') == $merk->id) selected @endif value="{{ $merk->id }}">{{ $merk->nama }}</option>
                                     @endforeach
                                 </select>
                                 {{-- <input type="number" name="merk_id" class="form-control @error('merk_id') is-invalid @enderror" id="nama" autocomplete="off" placeholder="Masukan Merk Armada" value="{{ old('merk_id') }}"> --}}

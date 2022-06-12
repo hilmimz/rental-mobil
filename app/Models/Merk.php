@@ -12,7 +12,8 @@ class Merk extends Model
 
     protected $guarded = ['id'];
 
-    public function armada(){
-        $this->hasMany(Armada::class);
+    public function armadas(){
+        return $this->hasMany(Armada::class);
     }
+
 }

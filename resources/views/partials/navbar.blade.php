@@ -28,8 +28,8 @@
     </div>
     <div class="dropdown">
         <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="me-2 d-none d-sm-block">Burhanudiin</span>
-            <a href='https://postimg.cc/gwMXZQj1' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
+            <span class="me-2 d-none d-sm-block">Fawwaz Ivandra</span>
+            <a href='https://www.instagram.com/fwz_ivdra/' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
         </div>
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
             <li>

@@ -57,7 +57,8 @@ class MerkController extends Controller
     public function show(Merk $merk)
     {
         return view('dashboard.merk.detail', [
-            'merk' => $merk
+            'merk' => $merk,
+            'armadas' => $merk->armadas
         ]);
     }
 

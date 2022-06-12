@@ -41,7 +41,7 @@ class ArmadaController extends Controller
         $rules = [
             'merk_id' => 'required',
             'jenis' => 'required',
-            'plat_nomor' => 'required',    
+            'plat_nomor' => 'required|unique:armadas',    
             // 'waktu_selesai' => "required|gt:$request->waktu_mulai", diputer jir format waktunya jadi ngaco
             'transmisi' => "required",
             'tgl_pajak' => 'required',

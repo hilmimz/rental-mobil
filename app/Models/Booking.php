@@ -12,9 +12,9 @@ class Booking extends Model
 
     protected $guarded = [];
 
-    protected $dates = [
-        'tgl_transaksi'
-    ];
+    // protected $dates = [
+    //     'tgl_transaksi'
+    // ];
 
     public function pelanggan(){
         return $this->belongsTo(Pelanggan::class);

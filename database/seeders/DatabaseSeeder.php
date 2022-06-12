@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->generateMerk();
         Armada::factory(30)->create();
-        Pelanggan::factory(20)->create();
+        Pelanggan::factory(50)->create();
         Booking::factory(30)->create();
         BookingArmada::factory(60)->create();
         Pembayaran::factory(60)->create();

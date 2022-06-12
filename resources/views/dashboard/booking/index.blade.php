@@ -29,26 +29,25 @@
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
                         <th>#</th>
-                        <th style="width: 12%;">Pelanggan_id</th>
-                        <th style="width: 12%;">Tgl Transkasi</th>
-                        <th style="width: 10%;">Harga Total</th>
-                        <th style="width: 11%;">Status</th>
-                        <th style="width: 11%;">No Invoice</th>
-                        <th style="width: 12%;">Keterangan</th>
-                        <th style="width: 10%;">Aksi</th>
+                        <th>No Invoice</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Tgl Transkasi</th>
+                        <th>Harga Total</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Selama hasil data ada dari sql  -->
-                    
                     @foreach($bookings as $booking)
                     <tr class="size2 align-middle">
                         <td>{{ $loop->iteration}}</td>
-                        <td>{{ $booking->pelanggan_id }}</td>
+                        <td>{{ $booking->no_invoice }}</td>
+                        <td>{{ $booking->pelanggan->nama }}</td>
                         <td>{{ $booking->tgl_transaksi }}</td>
                         <td>{{ $booking->harga_total}}</td>
                         <td>{{ $booking->status}}</td>
-                        <td>{{ $booking->no_invoice }}</td>
                         <td>{{ $booking->keterangan }}</td>
                         <td>
 

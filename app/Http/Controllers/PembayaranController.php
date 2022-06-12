@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
+use App\Models\Booking;
 
 class PembayaranController extends Controller
 {
@@ -27,7 +28,9 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        return view('dashboard.pembayaran.create');
+        return view('dashboard.pembayaran.create', [
+            'bookings' => Booking::orderBy('no_invoice')->get()
+        ]);
     }
 
     /**
@@ -47,7 +50,7 @@ class PembayaranController extends Controller
         ];
 
         $validatedRequest = $request->validate($rules);
-        BookingArmada::create($validatedRequest);
+        Pembayaran::create($validatedRequest);
 
         return redirect(route('pembayaran.index'))->with('success_create', 'Data has been added succesfully!');
     }
@@ -71,10 +74,12 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pembayaran $pembayaran)
     {
-        $pembayarans = Pembayaran::find($id);
-        return view('dashboard.pembayaran.edit', compact('pembayarans'));
+        return view('dashboard.pembayaran.edit', [
+            'pembayarans' => $pembayaran,
+            'bookings' => Booking::orderBy('no_invoice')->get()
+        ]);
     }
 
     /**

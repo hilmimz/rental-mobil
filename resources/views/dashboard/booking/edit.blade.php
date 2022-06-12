@@ -11,14 +11,27 @@
         <form method="POST" action="{{ route('booking.update', $bookings->id) }}">
           @method('PUT')
           @csrf
-          {{-- <input type="hidden" value="{{ $nomor }}" name="nomor"> --}}
+
+          <div class="mb-3 mt-4 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Invoice :</label>
+            <div class="col-sm-10">
+              <input type="text" name="no_invoice" class="form-control  @error('no_invoice') is-invalid @enderror" id="no_invoice"  
+              placeholder="Masukkan Nomor Invoice" autocomplete="off" value="{{ old('no_invoice', $bookings->no_invoice) }}">
+            </div>
+            @error('no_invoice')
+            <div class="col-sm-2"></div>
+            <div class="text-danger col-sm-10">
+              {{ $message }}
+            </div>
+            @enderror
+          </div>
+
           <div class="mb-3 mt-4 row">
             <label for="pelanggan_id" class="col-sm-2 col-form-label">Pelanggan</label>
             <div class="col-sm-10">
-            <select class="form-control" name="pelanggan_id" id="pelanggan_id">
-                <option value="">Pilih</option>
+              <select class="form-control" name="pelanggan_id" id="pelanggan_id">
                 @foreach ($pelanggans as $pelanggan)
-                  <option value="{{ $pelanggan->getKey() }}" @if($pelanggan->getKey() == old('pelanggan_id', $bookings->pelanggan_id)) selected @endif>{{ $pelanggan->nama }}</option>
+                  <option {{ (old('pelanggan_id', $bookings->pelanggan_id) == $pelanggan->id) ? 'selected' : ''  }} value="{{ $pelanggan->getKey() }}">{{ $pelanggan->nama }}</option>
                 @endforeach
               </select>
             </div>
@@ -30,13 +43,11 @@
             @enderror
           </div>
 
-
-
           <div class="mb-3 mt-4 row">
-            <label for="" class="col-sm-2 col-form-label">Tgl_Transkasi :</label>
+            <label for="" class="col-sm-2 col-form-label">Tgl Transkasi :</label>
             <div class="col-sm-10">
-               <input type="datetime-local" name="tgl_transaksi" class="form-control" id="tgl_transaksi" 
-               placeholder="Masukkan Tanggal Transaksi" autocomplete="off" value="{{ old('tgl_transaksi', $bookings->tgl_transaksi->format('Y-m-d')) }}">
+               <input type="date" name="tgl_transaksi" class="form-control" id="tgl_transaksi" 
+               placeholder="Masukkan Tanggal Transaksi" autocomplete="off" value="{{ old('tgl_transaksi', $bookings->tgl_transaksi) }}">
               </div>
             @error('tgl_transaksi')
             <div class="col-sm-2"></div>
@@ -74,22 +85,7 @@
             </div>
             @enderror
             </div>
-
           </div>
-          <div class="mb-3 mt-4 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Invoice :</label>
-            <div class="col-sm-10">
-              <input type="text" name="no_invoice" class="form-control  @error('no_invoice') is-invalid @enderror" id="no_invoice"  
-              placeholder="Masukkan Nomor Invoice" autocomplete="off" value="{{ old('no_invoice', $bookings->no_invoice) }}">
-            </div>
-            @error('no_invoice')
-            <div class="col-sm-2"></div>
-            <div class="text-danger col-sm-10">
-              {{ $message }}
-            </div>
-            @enderror
-          </div>
-
 
           <div class="mb-3 mt-4 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Keterangan :</label>

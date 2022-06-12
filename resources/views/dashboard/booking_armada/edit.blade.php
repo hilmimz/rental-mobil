@@ -14,27 +14,34 @@
                         @method('PUT')
 
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Booking ID :</label>
+                            <label for="" class="col-sm-2 col-form-label">Nomor Invoice :</label>
                             <div class="col-sm-10">
-                                <input type="number" name="booking_id" class="form-control @error('booking_id') is-invalid @enderror" 
-                                    id="booking_id" autocomplete="off" placeholder="Masukan Booking ID" value="{{ old('booking_id', $booking_armada->booking_id) }}">
+                                <select class="form-select  @error('booking_id') is-invalid @enderror" aria-label="Default select example" name="booking_id">
+                                    @foreach ($bookings as $booking)
+                                        <option @if(old('booking_id', $booking_armada->booking_id) == $booking->id) selected @endif value="{{ $booking->id }}">{{ $booking->no_invoice }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             @error('booking_id')
-                                <div class="col-sm-2"></div> 
+                                <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
 
-                        <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Armada ID :</label>
+                        <div class="mb-3 mt-3 row">
+                            <label for="" class="col-sm-2 col-form-label">Plat Nomor :</label>
                             <div class="col-sm-10">
-                                <input type="number" name="armada_id" class="form-control @error('armada_id') is-invalid @enderror" 
-                                    id="armada_id" placeholder="Masukkan Armada ID" value="{{ old('armada_id', $booking_armada->armada_id) }}">
+                                <select class="form-select  @error('armada_id') is-invalid @enderror" aria-label="Default select example" name="armada_id">
+                                    <option @if(!old('armada_id')) selected @endif value="">Pilih Plat Nomor</option>
+                                    @foreach ($armadas as $armada)
+                                        <option @if(old('armada_id', $booking_armada->booking_id) == $armada->id) selected @endif value="{{ $armada->id }}">{{ $armada->plat_nomor }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             @error('armada_id')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>

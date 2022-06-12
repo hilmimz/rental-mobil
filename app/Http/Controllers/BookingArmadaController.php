@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingArmada;
+use App\Models\Booking;
+use App\Models\Armada;
 use Illuminate\Http\Request;
 
 class BookingArmadaController extends Controller
@@ -27,7 +29,10 @@ class BookingArmadaController extends Controller
      */
     public function create()
     {
-        return view('dashboard.booking_armada.create');
+        return view('dashboard.booking_armada.create', [
+            'armadas' => Armada::orderBy('plat_nomor')->get(),
+            'bookings' => Booking::orderBy('no_invoice')->get(),
+        ]);
     }
 
     /**
@@ -78,6 +83,8 @@ class BookingArmadaController extends Controller
     public function edit(BookingArmada $bookingArmada)
     {
         return view('dashboard.booking_armada.edit', [
+            'armadas' => Armada::orderBy('plat_nomor')->get(),
+            'bookings' => Booking::orderBy('no_invoice')->get(),
             'booking_armada' => $bookingArmada
         ]);
     }

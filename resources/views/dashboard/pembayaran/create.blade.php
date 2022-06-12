@@ -10,19 +10,25 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('pembayaran.store') }}">
                         @csrf
-                        {{-- <input type="hidden" value="{{ $nomor }}" name="nomor"> --}}
+                        
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Booking ID :</label>
+                            <label for="" class="col-sm-2 col-form-label">Nomor Invoice :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="booking_id" class="form-control @error('booking_id') is-invalid @enderror" id="booking_id" autocomplete="off" placeholder="Masukan ID Booking" value="{{ old('booking_id') }}">
+                                <select class="form-select  @error('booking_id') is-invalid @enderror" aria-label="Default select example" name="booking_id">
+                                    <option @if(!old('booking_id')) selected @endif value="">Pilih Nomor Invoice</option>
+                                    @foreach ($bookings as $booking)
+                                        <option @if(old('booking_id') == $booking->id) selected @endif value="{{ $booking->id }}">{{ $booking->no_invoice }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             @error('booking_id')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">Tanggal Pembayaran :</label>
                             <div class="col-sm-10">
@@ -35,6 +41,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Jumlah Bayar :</label>
                             <div class="col-sm-10">
@@ -47,6 +54,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Cara Pembayaran :</label>
                             <div class="col-sm-10">
@@ -63,6 +71,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Tipe Pembayaran :</label>
                             <div class="col-sm-10">

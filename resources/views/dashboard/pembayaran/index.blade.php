@@ -27,7 +27,7 @@
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
                         <th>#</th>
-                        <th>Booking ID</th>
+                        <th>No Invoice</th>
                         <th>Tgl Pembayaran</th>
                         <th>Jumlah Bayar</th>
                         <th>Cara Pembayaran</th>
