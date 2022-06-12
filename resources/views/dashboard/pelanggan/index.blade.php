@@ -17,7 +17,7 @@
 <!-- Begin Page Content -->
 <div>
     <!-- Typography -->
-    <h2 class="mt-3"><center>Data Armada Rental Mobil<center></h2>
+    <h2 class="mt-3"><center>Data Pelanggan Rental Mobil<center></h2>
     <figure class="text-center"> 
         <a href="{{ route('pelanggan.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg">
             Tambahkan Data Pelanggan

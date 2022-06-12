@@ -45,7 +45,7 @@ class PelangganController extends Controller
             'alamat' => 'required',
             'no_telepon' => 'required'
         ];
-        $validateRequest = $request->validate($rules);
+        $validatedRequest = $request->validate($rules);
 
         Pelanggan::create($validatedRequest);
 
@@ -94,7 +94,7 @@ class PelangganController extends Controller
             'alamat' => 'required',
             'no_telepon' => 'required'
         ];
-        $validateRequest = $request->validate($rules);
+        $validatedRequest = $request->validate($rules);
 
         Pelanggan::where('id', $pelanggan->id)->update($validatedRequest);
 
@@ -111,6 +111,6 @@ class PelangganController extends Controller
     public function destroy(Pelanggan $pelanggan)
     {
         $pelanggan->delete();
-        return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been remove succesfully!');
+        return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
