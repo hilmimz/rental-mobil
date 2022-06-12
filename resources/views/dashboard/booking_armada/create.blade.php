@@ -123,7 +123,7 @@
                                 <button type="submit" name="aksi" value="tambah" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <a href="{{ route('armada.index') }}" type="button" class="btn btn-danger">
+                                <a href="{{ route('booking_armada.index') }}" type="button" class="btn btn-danger">
                                     Cancel 
                                 </a>
                             </div>

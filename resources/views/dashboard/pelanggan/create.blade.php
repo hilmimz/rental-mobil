@@ -43,9 +43,9 @@
                             <label for="" class="col-sm-2 col-form-label">Gender :</label>
                             <div class="col-sm-10">
                             <select class="form-select @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin" aria-label="Default select example">
-                                    <option @if(!old('status')) selected @endif value="">Pilih...</option>
-                                    <option @if(old('status') == "Selesai") selected @endif value="L">L</option>
-                                    <option @if(old('status') == "Aktif") selected @endif value="P">P</option>
+                                    <option @if(!old('jenis_kelamin')) selected @endif value="">Pilih...</option>
+                                    <option @if(old('jenis_kelamin') == "L") selected @endif value="L">L</option>
+                                    <option @if(old('jenis_kelamin') == "P") selected @endif value="P">P</option>
                                 </select>
                             </div>
                             @error('jenis_kelamin')

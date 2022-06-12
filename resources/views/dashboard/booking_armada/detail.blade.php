@@ -78,7 +78,14 @@
                             <input disabled type="text" name="status" class="form-control" 
                                 id="pelanggan_id"  autocomplete="off" value="{{ $booking_armada->created_at }}">
                         </div>
-                    </div>                        
+                    </div>
+                    <div class="mb-3 row mt-4">
+                        <div class="col">
+                            <a href="{{ route('booking_armada.index') }}" type="button" class="btn btn-primary">
+                                Back 
+                            </a>
+                        </div>
+                    </div>                           
            
                 </div>
             </div>
