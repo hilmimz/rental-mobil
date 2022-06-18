@@ -26,9 +26,20 @@
             </div>
         </div>
     </div>
+    @guest
+        <div class="d-flex flex-row w-10">
+            @if (Route::has('login'))
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            
+            @endif
+            @if (Route::has('register'))
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            @endif
+        </div>
+    @else
     <div class="dropdown">
         <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="me-2 d-none d-sm-block">Fawwaz Ivandra</span>
+            <span class="me-2 d-none d-sm-block">{{ Auth::user()->name }}</span>
             <a href='https://www.instagram.com/fwz_ivdra/' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
         </div>
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
@@ -46,12 +57,19 @@
             </li>
             <li class="dropdown-divider"></li>
             <li>
-                <a class="dropdown-item" href="#">
-                    <i class="ri-logout-box-r-line"></i>
-                    Log out
-                </a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
             </li>
         </ul>
     </div>
+    @endguest
 </nav>
 <!-- end: Navbar -->
