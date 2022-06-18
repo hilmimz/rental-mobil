@@ -21,21 +21,28 @@ use App\Http\Controllers\BookingArmadaController;
 |
 */
 
+
 Route::get('/', function () {
     return view('dashboard.index');
 });
 
-Route::resource('armada', ArmadaController::class);
-
-Route::resource('merk', MerkController::class);
-
-Route::resource('pembayaran', PembayaranController::class);
-
-Route::resource('pelanggan', PelangganController::class);
-
-Route::resource('booking', BookingController::class);
-
-Route::resource('booking_armada', BookingArmadaController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('armada', ArmadaController::class);
+    
+    Route::resource('merk', MerkController::class);
+    
+    Route::resource('pembayaran', PembayaranController::class);
+    
+    Route::resource('pelanggan', PelangganController::class);
+    
+    Route::resource('booking', BookingController::class);
+    
+    Route::resource('booking_armada', BookingArmadaController::class);
+});
 
 // tambahin
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
