@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArmadaController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\PembayaranController;
