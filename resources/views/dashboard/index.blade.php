@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 
+@section('upper_links')
+    @include('partials.datatables_upper_links')
+@endsection
+
+
 @section('content')
     
 <!-- Begin Page Content -->
@@ -149,7 +154,7 @@
     <div class="row">
 
         <!-- Content Column -->
-        <div class="col-lg-6 mb-4">
+        {{-- <div class="col-lg-6 mb-4">
 
             <!-- Project Card Example -->
             <div class="card shadow mb-4">
@@ -191,9 +196,9 @@
             </div>
 
 
-        </div>
+        </div> --}}
 
-        <div class="col-lg-6 mb-4">
+        {{-- <div class="col-lg-6 mb-4">
 
             <!-- Illustrations -->
             <div class="card shadow mb-4">
@@ -214,7 +219,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 
 </div>
@@ -223,9 +228,11 @@
 @endsection
 
 @section('bottom_links')
-    <!-- start: JS -->
+    {{-- <!-- start: JS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/script.js"></script>
-    <!-- end: JS -->
+    <!-- end: JS --> --}}
+
+    @include('partials.datatables_bottom_links')
 @endsection

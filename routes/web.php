@@ -23,11 +23,12 @@ use App\Http\Controllers\BookingArmadaController;
 */
 
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
-
 Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/', function () {
+        return view('dashboard.index');
+    });
+    
     Route::resource('armada', ArmadaController::class);
     
     Route::resource('merk', MerkController::class);

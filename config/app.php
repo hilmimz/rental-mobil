@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Rental Mobil GG'   /*env('APP_NAME', 'Laravel')*/,
 
     /*
     |--------------------------------------------------------------------------

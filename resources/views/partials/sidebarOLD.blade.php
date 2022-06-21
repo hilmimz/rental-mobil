@@ -14,13 +14,7 @@
             <!-- master data -->
 
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Features</li>
-                <li class="sidebar-menu-item {{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#">
-                        <i class="ri-user-line sidebar-menu-item-icon"></i>
-                            Backup Database                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                    </a>
-                </li>
-                {{-- <li class="sidebar-menu-item {{ Request::is('pelanggan') ? 'active' : '' }}">
+                <li class="sidebar-menu-item {{ Request::is('pelanggan') ? 'active' : '' }}">
                     <a href="#">
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
                             Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -31,7 +25,13 @@
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
                             Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
-                </li> --}}
+                </li>
+                <li class="sidebar-menu-item {{ Request::is('pelanggan') ? 'active' : '' }}">
+                    <a href="#">
+                        <i class="ri-user-line sidebar-menu-item-icon"></i>
+                            Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                    </a>
+                </li>
 
 
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Master Data</li>
@@ -60,7 +60,7 @@
                             Data Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     </a>
                 </li>
-                {{-- <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
+                <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
                     <a href="/pembayaran">
                         <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
                             Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -71,11 +71,11 @@
                         <i class="ri-bill-line sidebar-menu-item-icon"></i>
                             Data Booking Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
-                </li> --}}
+                </li>
             
             <!-- end master -->
 
-            {{-- <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Custom</li>
+            <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Custom</li>
             <li class="sidebar-menu-item has-dropdown">
                 <a href="#">
                     <i class="ri-user-line sidebar-menu-item-icon"></i>
@@ -104,10 +104,7 @@
                         </a>
                     </li>
                 </ul>
-            </li> --}}
-
-
-
+            </li>
         </ul>
     </div>
     <div class="sidebar-overlay"></div>
