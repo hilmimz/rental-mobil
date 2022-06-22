@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Pelanggan;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking>
@@ -16,6 +18,8 @@ class BookingFactory extends Factory
      */
     public function definition()
     {
+        // $pelangganCount = Pelanggan::all()->count();
+
         return [
             'pelanggan_id' => $this->faker->numberBetween(1,20),
             'tgl_transaksi' => $this->faker->dateTimeBetween('-1 week', '-1 day'),
@@ -26,3 +30,4 @@ class BookingFactory extends Factory
         ];
     }
 }
+ 
