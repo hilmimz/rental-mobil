@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('booking_armada', BookingArmadaController::class);
 
     Route::get('/exportpdf', [BookingController::class, 'exportpdf'])->name('exportpdf');
+
+    Route::get('/exportexcel', [BookingController::class, 'exportexcel'])->name('exportexcel');
 });
 
 // tambahin

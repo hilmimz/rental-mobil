@@ -24,8 +24,11 @@
             Tambahkan Data Booking
         </a>
         <br><br>
-        <a href="/exportpdf" type="button" class="btn btn-info mt-4 shadow-lg">
+        <a href="/exportpdf" type="button" class="btn btn-danger mt-4 shadow-lg">
             Export PDF
+        </a>
+        <a href="/exportexcel" type="button" class="btn btn-success mt-4 shadow-lg">
+            Export Excel
         </a>
 
 

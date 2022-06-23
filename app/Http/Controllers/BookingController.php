@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Pelanggan;
+use Excel;
 use PDF;
+use App\Exports\BookingExport;
 
 class BookingController extends Controller
 {
@@ -133,5 +135,9 @@ class BookingController extends Controller
         view()->share('bookings', $bookings);
         $pdf = PDF::loadview('dashboard.booking.databooking-pdf');
         return $pdf->download('dataBooking.pdf');
+    }
+
+    public function exportexcel(){
+        return Excel::download(new BookingExport, 'dataBooking.xlsx');
     }
 }
