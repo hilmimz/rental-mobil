@@ -78,6 +78,7 @@ class BookingController extends Controller
     {
         $pelanggans = Pelanggan::all();
         $bookings = $booking;
+        $this->authorize('superadmin');
         return view('dashboard.booking.edit', compact('bookings', 'pelanggans'));
     }
 
@@ -121,6 +122,7 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         $booking->delete();
+        $this->authorize('superadmin');
         return redirect (route('booking.index'))->with('success_remove', 'data has been removed succesfully!');
     }
 }

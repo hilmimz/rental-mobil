@@ -73,6 +73,7 @@ class PelangganController extends Controller
      */
     public function edit(Pelanggan $pelanggan)
     {
+        $this->authorize('superadmin');
         return view('dashboard.pelanggan.edit', ['pelanggan' => $pelanggan
         ]);
     }
@@ -111,6 +112,7 @@ class PelangganController extends Controller
     public function destroy(Pelanggan $pelanggan)
     {
         $pelanggan->delete();
+        $this->authorize('superadmin');
         return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }

@@ -82,6 +82,7 @@ class BookingArmadaController extends Controller
      */
     public function edit(BookingArmada $bookingArmada)
     {
+        $this->authorize('superadmin');
         return view('dashboard.booking_armada.edit', [
             'armadas' => Armada::orderBy('plat_nomor')->get(),
             'bookings' => Booking::orderBy('no_invoice')->get(),
@@ -125,6 +126,7 @@ class BookingArmadaController extends Controller
     public function destroy(BookingArmada $bookingArmada)
     {
         $bookingArmada->delete();
+        $this->authorize('superadmin');
         return redirect(route('booking_armada.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }

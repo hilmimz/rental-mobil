@@ -76,6 +76,7 @@ class PembayaranController extends Controller
      */
     public function edit(Pembayaran $pembayaran)
     {
+        $this->authorize('superadmin');
         return view('dashboard.pembayaran.edit', [
             'pembayarans' => $pembayaran,
             'bookings' => Booking::orderBy('no_invoice')->get()
@@ -114,6 +115,7 @@ class PembayaranController extends Controller
     public function destroy(Pembayaran $pembayaran)
     {
         $pembayaran->delete();
+        $this->authorize('superadmin');
         return redirect (route('pembayaran.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }

@@ -71,6 +71,7 @@ class MerkController extends Controller
     public function edit($id)
     {
         $merks = Merk::find($id);
+        $this->authorize('superadmin');
         return view('dashboard.merk.edit', compact('merks'));
     }
 
@@ -104,6 +105,7 @@ class MerkController extends Controller
     public function destroy(Merk $merk)
     {
         $merk->delete();
+        $this->authorize('superadmin');
         return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }

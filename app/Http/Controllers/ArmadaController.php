@@ -78,6 +78,7 @@ class ArmadaController extends Controller
     public function edit(Armada $armada)
     {
         $merks = Merk::all();
+        $this->authorize('superadmin');
         return view('dashboard.armada.edit', compact(['armada', 'merks']));
     }
 
@@ -135,6 +136,7 @@ class ArmadaController extends Controller
     public function destroy(Armada $armada)
     {
         $armada->delete();
+        $this->authorize('superadmin');
         return redirect (route('armada.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
