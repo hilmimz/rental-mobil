@@ -23,6 +23,11 @@
         <a href="{{ route('booking.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg">
             Tambahkan Data Booking
         </a>
+        <br><br>
+        <a href="/exportpdf" type="button" class="btn btn-info mt-4 shadow-lg">
+            Export PDF
+        </a>
+
 
         <div class="container table-responsive mt-4">
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">

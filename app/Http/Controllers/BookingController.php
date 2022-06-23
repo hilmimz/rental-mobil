@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Pelanggan;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -124,5 +125,13 @@ class BookingController extends Controller
         $booking->delete();
         $this->authorize('superadmin');
         return redirect (route('booking.index'))->with('success_remove', 'data has been removed succesfully!');
+    }
+
+    public function exportpdf(){
+        $bookings = Booking::all();
+
+        view()->share('bookings', $bookings);
+        $pdf = PDF::loadview('dashboard.booking.databooking-pdf');
+        return $pdf->download('dataBooking.pdf');
     }
 }

@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('booking', BookingController::class);
     
     Route::resource('booking_armada', BookingArmadaController::class);
+
+    Route::get('/exportpdf', [BookingController::class, 'exportpdf'])->name('exportpdf');
 });
 
 // tambahin
