@@ -48,8 +48,8 @@
           <div class="mb-3 mt-4 row">
             <label for="" class="col-sm-2 col-form-label">Tgl Transaksi :</label>
             <div class="col-sm-10">
-              <input type="date" name="tgl_transaksi" class="form-control" id="tgl_transaksi"
-                placeholder="Masukkan Tanggal Transaksi" autocomplete="off" value="{{ old('tgl_transaksi') }}">
+              <input type="text" name="tgl_transaksi" class="form-control" id="tgl_transaksi"
+              placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_transaksi') }}">
             </div>
             @error('tgl_transaksi')
             <div class="col-sm-2"></div>
@@ -61,7 +61,7 @@
 
 
          
-          <div class="mb-3 mt-4 row">
+          {{-- <div class="mb-3 mt-4 row">
             <label for="" class="col-sm-2 col-form-label">Harga Total:</label>
             <div class="col-sm-10">
               <input type="number" name="harga_total" class="form-control" id="harga_total"
@@ -73,10 +73,10 @@
               {{ $message }}
             </div>
              @enderror
-          </div>
+          </div> --}}
 
 
-          <div class="mb-3 mt-4 row">
+          {{-- <div class="mb-3 mt-4 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Status :</label>
             <div class="col-sm-10">
             <select class="form-select  @error('status') is-invalid @enderror" aria-label="Default select example" name="status">
@@ -91,7 +91,7 @@
               {{ $message }}
             </div>
              @enderror
-          </div>
+          </div> --}}
 
 
           <div class="mb-3 mt-4 row">

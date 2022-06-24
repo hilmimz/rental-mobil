@@ -12,12 +12,14 @@
                     <form method="POST" action="{{ route('booking_armada.store') }}">
                         @csrf
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Nomor Invoice :</label>
+                            <label for="" class="col-sm-2 col-form-label">Booking yang berstatus "Tidak Aktif" :</label>
                             <div class="col-sm-10">
                                 <select class="form-select  @error('booking_id') is-invalid @enderror" aria-label="Default select example" name="booking_id">
                                     <option @if(!old('booking_id')) selected @endif value="">Pilih Nomor Invoice</option>
                                     @foreach ($bookings as $booking)
-                                        <option @if(old('booking_id') == $booking->id) selected @endif value="{{ $booking->id }}">{{ $booking->no_invoice }}</option>
+                                        @if($booking->status == 'Tidak aktif')
+                                            <option @if(old('booking_id') == $booking->id) selected @endif value="{{ $booking->id }}">{{ $booking->no_invoice }}</option>
+                                        @endif 
                                     @endforeach
                                 </select>
                             </div>
@@ -30,12 +32,14 @@
                         </div>
 
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Plat Nomor :</label>
+                            <label for="" class="col-sm-2 col-form-label">Armada yang tersedia :</label>
                             <div class="col-sm-10">
                                 <select class="form-select  @error('armada_id') is-invalid @enderror" aria-label="Default select example" name="armada_id">
                                     <option @if(!old('armada_id')) selected @endif value="">Pilih Plat Nomor</option>
                                     @foreach ($armadas as $armada)
-                                        <option @if(old('armada_id') == $armada->id) selected @endif value="{{ $armada->id }}">{{ $armada->plat_nomor }}</option>
+                                        @if($armada->tersedia)
+                                            <option @if(old('armada_id') == $armada->id) selected @endif value="{{ $armada->id }}">{{ $armada->plat_nomor }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -45,14 +49,14 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> 
 
 
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Waktu Mulai :</label>
                             <div class="col-sm-10">
-                                <input type="datetime-local" name="waktu_mulai" class="form-control @error('waktu_mulai') is-invalid @enderror" 
-                                    id="email" placeholder="Masukkan Waktu Mulai" autocomplete="off"  value="{{ old('waktu_mulai') }}">
+                                <input type="text" name="waktu_mulai" class="form-control @error('waktu_mulai') is-invalid @enderror" 
+                                    id="text" placeholder="Format: TTTT-BB-HH JJ:MM, contoh: 2022-01-02 10:00" autocomplete="off"  value="{{ old('waktu_mulai') }}">
                             </div>
                             @error('waktu_mulai')
                                 
@@ -63,51 +67,52 @@
                             @enderror
                         </div>
                         
-                        <div class="mb-3 mt-4 row">
+                        {{-- <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Waktu Selesai :</label>
                             <div class="col-sm-10">
-                                <input type="datetime-local" name="waktu_selesai" class="form-control @error('waktu_selesai') is-invalid @enderror" 
-                                    id="email"  placeholder="Masukkan Waktu Selesai" autocomplete="off" value="{{ old('waktu_selesai') }}">
+                                <input type="text" name="waktu_selesai" class="form-control @error('waktu_selesai') is-invalid @enderror" 
+                                    id="email"  placeholder="Format: TTTT-BB-HH JJ:MM, contoh: 2022-01-02 10:00" autocomplete="off" value="{{ old('waktu_selesai') }}">
                             </div>
                             @error('waktu_selesai')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div> 
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         {{-- TODO: harusnya diitung otomatis --}}
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Durasi Jam :</label>
+                            <label for="" class="col-sm-2 col-form-label">Durasi Jam (akan dikali 3) :</label>
                             <div class="col-sm-10">
                                 <input type="number" name="durasi_jam" class="form-control @error('durasi_jam') is-invalid @enderror" 
-                                    id="pelanggan_id"  placeholder="Masukkan Durasi Jam" autocomplete="off" value="{{ old('durasi_jam') }}">
+                                    id="pelanggan_id"  placeholder="Jam akan dikali 3" autocomplete="off" value="{{ old('durasi_jam') }}">
                             </div>
                             @error('durasi_jam')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+                        
 
                         {{-- TODO: harusnya diitung otomatis --}}
-                        <div class="mb-3 mt-4 row">
+                        {{-- <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Harga :</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga" class="form-control @error('harga') is-invalid @enderror" 
                                     id="pelanggan_id"  placeholder="Masukkan Harga" autocomplete="off" value="{{ old('harga') }}">
                             </div>
                             @error('harga')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
-                        <div class="mb-3 mt-4 row">
+                        {{-- <div class="mb-3 mt-4 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Status :</label>
                             <div class="col-sm-10">
                                 <select class="form-select @error('status') is-invalid @enderror" aria-label="Default select example" name="status">
@@ -117,12 +122,12 @@
                                 </select>
                             </div>
                             @error('status')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div> 
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         
                         <div class="mb-3 row mt-4">

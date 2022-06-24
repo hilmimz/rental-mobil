@@ -60,7 +60,7 @@
                             Data Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     </a>
                 </li>
-                {{-- <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
+                <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
                     <a href="/pembayaran">
                         <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
                             Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -71,7 +71,7 @@
                         <i class="ri-bill-line sidebar-menu-item-icon"></i>
                             Data Booking Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
-                </li> --}}
+                </li>
             
             <!-- end master -->
 

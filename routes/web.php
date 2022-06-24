@@ -40,8 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('booking', BookingController::class);
     
     Route::resource('booking_armada', BookingArmadaController::class);
+
+    Route::post('booking/indexNew', [BookingController::class, 'indexWithDateRange']);
 });
 
+// Route::post('indexNew', function(){ return 'memek';});
 // tambahin
 
 

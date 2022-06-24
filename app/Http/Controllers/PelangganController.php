@@ -41,7 +41,7 @@ class PelangganController extends Controller
             'nik' => 'required',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'tgl_lahir' => 'required',
+            'tgl_lahir' => 'required|date|date_format:Y-m-d',
             'alamat' => 'required',
             'no_telepon' => 'required'
         ];
@@ -110,7 +110,17 @@ class PelangganController extends Controller
      */
     public function destroy(Pelanggan $pelanggan)
     {
-        $pelanggan->delete();
-        return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been removed succesfully!');
+
+        //delete can only be done if there are no Booking related to this Pelanggan
+        if($pelanggan->bookings->isEmpty()){
+            $pelanggan->delete();
+            return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been removed succesfully!');
+        } else {
+            return redirect (route('pelanggan.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if there are no Booking related to this Data!");
+        }
+
+
+        // $pelanggan->delete();
+        // return redirect (route('pelanggan.index'))->with('success_remove', 'Data has been removed succesfully!');
     }
 }
