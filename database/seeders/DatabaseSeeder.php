@@ -29,13 +29,13 @@ class DatabaseSeeder extends Seeder
     // private $faker = Faker\Factory::create();
 
 
-    function createUser($name, $email, $is_superadmin)
+    function createUser($name, $email, $super_admin)
     {
         User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt('12345678'),
-            'is_superadmin' => $is_superadmin
+            'super_admin' => $super_admin
         ]);
     }
     function generateUser()

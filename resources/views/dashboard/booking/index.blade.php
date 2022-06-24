@@ -97,9 +97,10 @@
                                         <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
-                                                <i class="ri-delete-bin-fill"></i>
-                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-sm" 
+                                                onClick="return confirm('Deleting this item possibily will also delete related Pembayaran, BookingArmada, and Pengembalian item. Are you sure you want to delete this item? ')">
+                                            <i class="ri-delete-bin-fill"></i>
+                                        </button>
                                         </form>
                                     @endcan
                                 </div>

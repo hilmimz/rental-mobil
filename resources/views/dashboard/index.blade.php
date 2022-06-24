@@ -345,11 +345,11 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
-    {{-- <!-- start: JS -->
+    <!-- start: JS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/script.js"></script>
-    <!-- end: JS --> --}}
+    <!-- end: JS -->
 
-    @include('partials.datatables_bottom_links')
+    {{-- @include('partials.datatables_bottom_links') --}}
 @endsection
