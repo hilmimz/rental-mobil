@@ -151,7 +151,7 @@
     </div>
 
     {{-- Status Booking --}}
-    <div class="row">
+    <div class="row flex-wrap">
          <!-- Booking Aktif -->
          <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -336,9 +336,15 @@
 </div>
 <!-- /.container-fluid -->
 
+
 @endsection
 
 @section('bottom_links')
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
     {{-- <!-- start: JS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>

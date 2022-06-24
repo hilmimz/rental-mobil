@@ -42,12 +42,6 @@
                             Data Pelanggan                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
-                <li class="sidebar-menu-item {{ Request::is('booking') ? 'active' : '' }}">
-                    <a href="/booking">
-                        <i class="ri-coins-line sidebar-menu-item-icon"></i>
-                            Data Booking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                    </a>
-                </li>
                 <li class="sidebar-menu-item {{ Request::is('merk') ? 'active' : '' }}">
                     <a href="/merk">
                         <i class="ri-stack-line sidebar-menu-item-icon"></i>
@@ -60,16 +54,28 @@
                             Data Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                     </a>
                 </li>
-                <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
-                    <a href="/pembayaran">
-                        <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
-                            Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                <li class="sidebar-menu-item {{ Request::is('booking') ? 'active' : '' }}">
+                    <a href="/booking">
+                        <i class="ri-coins-line sidebar-menu-item-icon"></i>
+                            Data Booking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
                 </li>
                 <li class="sidebar-menu-item {{ Request::is('booking_armada') ? 'active' : '' }}">
                     <a href="/booking_armada">
                         <i class="ri-bill-line sidebar-menu-item-icon"></i>
                             Data Booking Armada                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                    </a>
+                </li>
+                <li class="sidebar-menu-item {{ Request::is('pembayaran') ? 'active' : '' }}">
+                    <a href="/pembayaran">
+                        <i class="ri-shopping-cart-line sidebar-menu-item-icon"></i>
+                            Data Pembayaran                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                    </a>
+                </li>
+                <li class="sidebar-menu-item {{ Request::is('pengembalian') ? 'active' : '' }}">
+                    <a href="/pengembalian">
+                        <i class="ri-bill-line sidebar-menu-item-icon"></i>
+                            Data Pengembalian                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
                 </li>
             
