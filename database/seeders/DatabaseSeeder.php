@@ -315,13 +315,20 @@ class DatabaseSeeder extends Seeder
         
         $this->createPembayaran(5, '2022-02-14', 3485000, 'Transfer', 'Pelunasan');
         
+        
         $this->createPembayaran(6, '2022-03-17', 500000, 'Cash', 'DP');
         $this->createPembayaran(6, '2022-03-23', 620000, 'Cash', 'Pelunasan');
         
+        $this->createPembayaran(7, now(), 800000, 'Transfer', 'Pelunasan');
+        
         $this->createPembayaran(8, '2022-04-17', 380000, 'Cash', 'Pelunasan');
         $this->createPembayaran(8, '2022-04-27', 100000, 'Transfer', 'Denda');
-
-
+        
+        $this->createPembayaran(9, now(), 200000, 'Transfer', 'DP');
+        
+        $this->createPembayaran(10, now(), 200000, 'Transfer', 'DP');
+        $this->createPembayaran(11, now(), 200000, 'Transfer', 'DP');
+        $this->createPembayaran(12, now(), 200000, 'Transfer', 'DP');
     }
     
 }

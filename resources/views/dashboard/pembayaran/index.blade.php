@@ -12,6 +12,9 @@
     <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
 @elseif(session()->has('success_remove'))
     <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
+    
+@elseif(session()->has('fail_remove'))
+    <div class="alert alert-danger mt-3" role="alert">{{ session('fail_remove') }}</div>
 @endif
 <!-- Table  -->
 <div>

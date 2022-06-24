@@ -20,18 +20,41 @@
     <!-- Typography -->
     <h2 class="mt-3"><center>Data Booking Rental Mobil<center></h2>
     <figure class="text-center"> 
-        <a href="{{ route('booking.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg">
+        <a href="{{ route('booking.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg mb-3">
             Tambahkan Data Booking
         </a>
+        
+        <div class="d-flex flex-column justify-content-center">
+            <p class="mx-2">Lihat berdasarkan rentang waktu: </p> 
+            <form action="booking" method="GET">
+                {{-- @csrf --}}
+                {{-- @method('POST') --}}
+                <div class="d-flex justify-content-center">
+                    <label for="from_date">Dari (YYYY-MM-DD):</label>
+                    <input type="text" class="form-control col-xs-2" name="from_date" placeholder="e.g. 2001-01-01" style="width:140px"
+                        value="{{ $from_date }}">
+                        {{-- @dd($request); --}}
+
+                </div>
+                <div class="d-flex justify-content-center">
+                    <label for="to_date">Sampai (YYYY-MM-DD):</label>
+                    <input type="text" class="form-control" name="to_date" placeholder="e.g. 2010-02-03" style="width:140px"
+                        value="{{ $to_date }}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </form>
+        </div>
 
         <div class="container table-responsive mt-4">
-            <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">
+            <table id="dt" class="table table-hover pt-2 mb-2 order-column ">
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
                         <th>#</th>
                         <th>No Invoice</th>
                         <th>Nama Pelanggan</th>
-                        <th>Tgl Transkasi</th>
+                        <th>Tgl Transaksi</th>
+                        {{-- <th>Armada</th> --}}
                         <th>Harga Total</th>
                         <th>Status</th>
                         <th>Keterangan</th>
@@ -39,37 +62,76 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Selama hasil data ada dari sql  -->
+                    {{-- <!-- Selama hasil data ada dari sql  -->
                     @foreach($bookings as $booking)
-                    <tr class="size2 align-middle">
-                        <td>{{ $loop->iteration}}</td>
-                        <td>{{ $booking->no_invoice }}</td>
-                        <td>{{ $booking->pelanggan->nama }}</td>
-                        <td>{{ $booking->tgl_transaksi }}</td>
-                        <td>{{ $booking->harga_total}}</td>
-                        <td>{{ $booking->status}}</td>
-                        <td>{{ $booking->keterangan }}</td>
-                        <td>
+                    <?php // $upper_iteration = $loop->iteration; ?>
+                    <?php // $baCount = $booking->booking_armadas->count() ?>
+                        @foreach($booking->booking_armadas as $ba)
+                        @if($loop->iteration == 1)
+                            <tr class="size2 align-middle">
+                                <td rowspan="{{ $baCount }}">{{ $upper_iteration}}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->no_invoice }}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->pelanggan->nama }}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->tgl_transaksi }}</td>
+                                <td>{{ $ba->armada->plat_nomor }}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->harga_total}}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->status}}</td>
+                                <td rowspan="{{ $baCount }}">{{ $booking->keterangan }}</td>
+                                <td rowspan="{{ $baCount }}">
+                                    <div class="d-flex justify-content-around">
+                                        <a href="{{ route('booking.edit', $booking->id) }}" type="button" class="btn btn-primary btn-sm">
+                                            <i class="ri-pencil-fill "></i>
+                                        </a>
+                                        <a href="{{ route('booking.show', $booking->id) }}" type="button" class="btn btn-info btn-sm">
+                                            <i class="ri-eye-line "></i>
+                                        </a>
+                                        <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
+                                                <i class="ri-delete-bin-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @else
+                                <tr>
+                                    <td style="font-size:13px">{{ $ba->armada->plat_nomor }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endforeach --}}
 
-                            <div class="d-flex justify-content-around">
-                                <a href="{{ route('booking.edit', $booking->id) }}" type="button" class="btn btn-primary btn-sm">
-                                    <i class="ri-pencil-fill "></i>
-                                </a>
-                                <a href="{{ route('booking.show', $booking->id) }}" type="button" class="btn btn-info btn-sm">
-                                    <i class="ri-eye-line "></i>
-                                </a>
-                                <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
-                                        <i class="ri-delete-bin-fill"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-
-                    @endforeach
+                    @foreach($bookings as $booking)
+                        <tr class="size2 align-middle">
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $booking->no_invoice }}</td>
+                            <td>{{ $booking->pelanggan->nama }}</td>
+                            <td>{{ $booking->tgl_transaksi }}</td>
+                            <td>{{ $booking->harga_total}}</td>
+                            <td>{{ $booking->status}}</td>
+                            <td>{{ $booking->keterangan }}</td>
+                            <td>
+                                <div class="d-flex justify-content-around">
+                                    <a href="{{ route('booking.edit', $booking->id) }}" type="button" class="btn btn-primary btn-sm">
+                                        <i class="ri-pencil-fill "></i>
+                                    </a>
+                                    <a href="{{ route('booking.show', $booking->id) }}" type="button" class="btn btn-info btn-sm">
+                                        <i class="ri-eye-line "></i>
+                                    </a>
+                                    <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" 
+                                            onClick="return confirm('Deleting this item possibily will also delete related Pembayaran, BookingArmada, and Pengembalian item. Are you sure you want to delete this item? ')">
+                                            <i class="ri-delete-bin-fill"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach 
 
                 </tbody>
             </table>

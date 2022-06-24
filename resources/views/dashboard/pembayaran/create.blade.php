@@ -10,14 +10,18 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('pembayaran.store') }}">
                         @csrf
-                        
+                         
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">Nomor Invoice :</label>
+                            <label for="" class="col-sm-2 col-form-label">Booking yang berstatus "Belum lunas" :</label>
                             <div class="col-sm-10">
                                 <select class="form-select  @error('booking_id') is-invalid @enderror" aria-label="Default select example" name="booking_id">
                                     <option @if(!old('booking_id')) selected @endif value="">Pilih Nomor Invoice</option>
                                     @foreach ($bookings as $booking)
-                                        <option @if(old('booking_id') == $booking->id) selected @endif value="{{ $booking->id }}">{{ $booking->no_invoice }}</option>
+                                        @if($booking->status_pembayaran == 'Belum lunas')
+                                            <option @if(old('booking_id') == $booking->id) selected @endif value="{{ $booking->id }}">
+                                                {{ $booking->no_invoice }}, Sisa pembayaran: {{ $booking->sisa_pembayaran }}
+                                            </option>
+                                        @endif 
                                     @endforeach
                                 </select>
                             </div>
@@ -32,10 +36,11 @@
                         <div class="mb-3 mt-3 row">
                             <label for="" class="col-sm-2 col-form-label">Tanggal Pembayaran :</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tgl_pembayaran" class="form-control mt-3 @error('tgl_pembayaran') is-invalid @enderror" id="tgl_pembayaran" autocomplete="off" placeholder="Masukan Tanggal Pembayaran" value="{{ old('tgl_pembayaran') }}">
+                                <input type="text" name="tgl_pembayaran" class="form-control mt-3 @error('tgl_pembayaran') is-invalid @enderror" id="tgl_pembayaran" autocomplete="off" 
+                                placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" value="{{ old('tgl_pembayaran') }}">
                             </div>
                             @error('tgl_pembayaran')
-                                <div class="col-sm-2"></div> {{-- dummy --}}
+                                <div class="col-sm-2"></div> 
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>

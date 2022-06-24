@@ -61,6 +61,7 @@ class Booking extends Model
     {
         $bookings = Booking::all();
         foreach( $bookings as $booking){
+            
             $pembayarans = $booking->pembayarans;
             $total_pembayaran = 0;
             $sisa_pembayaran = $booking->sisa_pembayaran;
@@ -84,13 +85,13 @@ class Booking extends Model
         foreach( $bookings as $booking){
             $booking_armadas = $booking->booking_armadas;
             
-            $status_pengembalian = 'Sudah dikembalikan';
+            $status_pengembalian = 'Belum dikembalikan';
             foreach($booking_armadas as $bk){
                 if($bk->status == 'Telat'){
                     $status_pengembalian = 'Telat dikembalikan';
                     break;
-                } else if($bk->status == 'Aktif'){
-                    $status_pengembalian = 'Belum dikembalikan';
+                } else if($bk->status == 'Selesai'){
+                    $status_pengembalian = 'Sudah dikembalikan';
                 }                
             }
 
@@ -102,13 +103,26 @@ class Booking extends Model
     {
         $bookings = Booking::all();
         foreach( $bookings as $booking){
-            $status = 'Belum selesai';
-            if($booking->status_pembayaran == 'Lunas' && $booking->status_pengembalian == 'Sudah dikembalikan'){
-                $status = 'Selesai';
+            $status = "Tidak aktif";
+
+            if( !$booking->pembayarans->isEmpty() && !$booking->booking_armadas->isEmpty() ){
+                $status = 'Aktif';
+
+                if($booking->status_pembayaran == 'Lunas' && $booking->status_pengembalian == 'Sudah dikembalikan'){
+                    $status = 'Selesai';
+                }
             }
 
             $booking->update(['status' => $status]);
         }
+    }
+
+    public static function synchronizeAll()
+    {
+        Booking::synchronizeHarga();
+        Booking::synchronizePembayaran();
+        Booking::synchronizePengembalian();
+        Booking::synchronizeStatus();
     }
 }
 

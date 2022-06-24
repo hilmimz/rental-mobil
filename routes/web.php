@@ -48,8 +48,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pengembalian', PengembalianController::class);
 
     Route::resource('keterlambatan', KeterlambatanController::class);
+
 });
 
+// Route::post('indexNew', function(){ return 'memek';});
 // tambahin
 
 
