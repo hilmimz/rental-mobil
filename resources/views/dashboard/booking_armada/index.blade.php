@@ -12,6 +12,9 @@
     <div class="alert alert-success mt-3" role="alert">{{ session('success_remove') }}</div>
 @elseif(session()->has('success_edit'))
     <div class="alert alert-success mt-3" role="alert">{{ session('success_edit') }}</div>
+
+@elseif(session()->has('fail_remove'))
+    <div class="alert alert-danger mt-3" role="alert">{{ session('fail_remove') }}</div>
 @endif
 
 
@@ -67,7 +70,7 @@
                                 <form action="{{ route('booking_armada.destroy', $bookingArmada->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
+                                    <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this item? It will also possibly delete ')">
                                         <i class="ri-delete-bin-fill"></i>
                                     </button>
                                 </form>

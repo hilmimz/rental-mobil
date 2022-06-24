@@ -104,8 +104,18 @@ class MerkController extends Controller
      */
     public function destroy(Merk $merk)
     {
-        $merk->delete();
+
         $this->authorize('superadmin');
-        return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
+        //delete can only be done if there are no Armada related to this Merk
+        if($merk->armadas->isEmpty()){
+            $merk->delete();
+            return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
+        } else {
+            return redirect (route('merk.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if there are no Armada related to this Data!");
+        }
+
+        // $merk->delete();
+        // return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
+
     }
 }

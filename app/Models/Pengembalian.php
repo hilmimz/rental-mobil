@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BookingArmada;
 
-use App\Models\Booking;
-
-class Pelanggan extends Model
+class Pengembalian extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
-    public function bookings(){
-        return $this->hasMany(Booking::class);
+    public function booking_armada(){
+        return $this->belongsTo(BookingArmada::class);
     }
+
+    
 }

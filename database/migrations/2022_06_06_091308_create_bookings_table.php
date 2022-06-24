@@ -17,8 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pelanggan_id');
             $table->date('tgl_transaksi');
+            $table->integer('rental_total');
+            $table->integer('denda_total');
             $table->integer('harga_total');
-            $table->string('status', 20);
+            $table->integer('sisa_pembayaran');
+            $table->string('status_pembayaran');
+            $table->string('status_pengembalian');
+            $table->string('status');
             $table->string('no_invoice', 20)->unique();
             $table->text('keterangan')->nullable();
             $table->timestamps();

@@ -7,6 +7,9 @@ use App\Models\Booking;
 use App\Models\Armada;
 use Illuminate\Http\Request;
 
+use DateTime;
+use DateInterval;
+
 class BookingArmadaController extends Controller
 {
     /**
@@ -47,17 +50,32 @@ class BookingArmadaController extends Controller
         $rules = [
             'booking_id' => 'required',
             'armada_id' => 'required',
-            'waktu_mulai' => 'required',    
+            // 'waktu_mulai' => 'regex:#^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$#',    
+            'waktu_mulai' => 'required|date|date_format:Y-m-d H:i',    
             // 'waktu_selesai' => "required|gt:$request->waktu_mulai", diputer jir format waktunya jadi ngaco
-            'waktu_selesai' => "required",
-            'durasi_jam' => 'required|integer|min:3',
-            'harga' => 'required|integer|min:1',
-            'status' => 'required',    
+            // 'waktu_selesai' => "regex:#^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$#",
+            'durasi_jam' => 'required|integer|min:1',
+            // 'harga' => 'required|integer|min:1',
+            // 'status' => 'required',    
         ];
 
+        // $request->input('waktu_mulai') = new DateTime($request->input('waktu_mulai'));
+
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['durasi_jam'] *= 3;
+        $validatedRequest['status'] = "Aktif";
+        $validatedRequest['harga'] = $validatedRequest['durasi_jam'] * Armada::find($validatedRequest['armada_id'])->harga_tiga_jam;
+        
+        
+        $waktu_selesai = new DateTime($validatedRequest['waktu_mulai']);
+        $waktu_selesai->add( new DateInterval("PT" . $validatedRequest['durasi_jam'] . "H"));
+        $validatedRequest['waktu_selesai'] = $waktu_selesai;
+
+
 
         BookingArmada::create($validatedRequest);
+        Booking::synchronizeAll();
+        Armada::synchronizeTersedia();
         return redirect(route('booking_armada.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
@@ -125,8 +143,14 @@ class BookingArmadaController extends Controller
      */
     public function destroy(BookingArmada $bookingArmada)
     {
-        $bookingArmada->delete();
+
         $this->authorize('superadmin');
-        return redirect(route('booking_armada.index'))->with('success_remove', 'Data has been removed succesfully!');
+        if($bookingArmada->booking->status == "Tidak aktif"){
+            $bookingArmada->delete();
+            return redirect (route('booking_armada.index'))->with('success_remove', 'Data has been removed succesfully!');
+        } else {
+            return redirect (route('booking_armada.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if its Booking's status is \"Tidak aktif\"!");
+        }
+
     }
 }

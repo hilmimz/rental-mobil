@@ -8,7 +8,9 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingArmadaController;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\KeterlambatanController;
 
 //Test
 /*
@@ -25,10 +27,12 @@ use App\Http\Controllers\BookingArmadaController;
 
 Route::middleware(['auth'])->group(function () {
     
-    Route::get('/', function () {
-        return view('dashboard.index');
-    });
+    // Route::get('/', function () {
+    //     return view('dashboard.index');
+    // });
     
+    Route::get('/', [DashboardController::class, 'index']);
+
     Route::resource('armada', ArmadaController::class);
     
     Route::resource('merk', MerkController::class);
@@ -41,12 +45,14 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('booking_armada', BookingArmadaController::class);
 
+    Route::resource('pengembalian', PengembalianController::class);
+
     Route::get('/exportpdf', [BookingController::class, 'exportpdf'])->name('exportpdf');
 
     Route::get('/exportexcel', [BookingController::class, 'exportexcel'])->name('exportexcel');
+
 });
 
-// tambahin
 
 
 Auth::routes();

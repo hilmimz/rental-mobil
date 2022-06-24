@@ -134,9 +134,20 @@ class ArmadaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Armada $armada)
-    {
-        $armada->delete();
+
+    { 
+      
         $this->authorize('superadmin');
-        return redirect (route('armada.index'))->with('success_remove', 'Data has been removed succesfully!');
+        //delete can only be done if there are no BookingArmada related to this Armada
+        if($armada->booking_armadas->isEmpty()){
+            $armada->delete();
+            return redirect (route('armada.index'))->with('success_remove', 'Data has been removed succesfully!');
+        } else {
+            return redirect (route('armada.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if there are no BookingArmada related to this Data!");
+        }
+
+        // $armada->delete();
+        // return redirect (route('armada.index'))->with('success_remove', 'Data has been removed succesfully!');
+
     }
 }

@@ -43,15 +43,18 @@ class PembayaranController extends Controller
     {
         $rules = [
             'booking_id' => 'required',
-            'tgl_pembayaran' => 'required',
-            'jumlah_bayar' => 'required|integer|min:2',    
+            // 'tgl_pembayaran' => 'regex:#^[0-9]{4}-[0-9]{2}-[0-9]{2}$#',
+            'tgl_pembayaran' => 'required|date|date_format:Y-m-d',
+            'jumlah_bayar' => 'required|integer|min:1',    
             'cara_pembayaran' => 'required',
             'tipe_pembayaran' => 'required',
         ];
 
         $validatedRequest = $request->validate($rules);
-        Pembayaran::create($validatedRequest);
+        // $validatedRequest['tgl_pembayaran'] = now();
 
+        Pembayaran::create($validatedRequest);
+        Booking::synchronizeAll();
         return redirect(route('pembayaran.index'))->with('success_create', 'Data has been added succesfully!');
     }
 
@@ -114,8 +117,16 @@ class PembayaranController extends Controller
      */
     public function destroy(Pembayaran $pembayaran)
     {
-        $pembayaran->delete();
+
+
         $this->authorize('superadmin');
-        return redirect (route('pembayaran.index'))->with('success_remove', 'Data has been removed succesfully!');
+        //delete can only be done if its Booking status is "Tidak aktif"
+        if($pembayaran->booking->status == "Tidak aktif"){
+            $pembayaran->delete();
+            return redirect (route('pembayaran.index'))->with('success_remove', 'Data has been removed succesfully!');
+        } else {
+            return redirect (route('pembayaran.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if its Booking's status is \"Tidak aktif\"!");
+        }
+
     }
 }

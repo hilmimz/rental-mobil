@@ -150,6 +150,117 @@
         </div>
     </div>
 
+    {{-- Status Booking --}}
+    <div class="row flex-wrap">
+         <!-- Booking Aktif -->
+         <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-info">Booking Aktif</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-hover table-striped mb-2 order-column">
+                        <thead>
+                            <tr>
+                                <th>No Invoice</th>
+                                <th>ID Armada</th>
+                                <th>Waktu Selesai</th>
+                                <th>Status</th>
+                                <th>Sisa Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bookAktif as $item)
+                            <tr>
+                                <td>{{ $item->no_invoice }}</td>
+                                <td>{{ $item->armada_id }}</td>
+                                <td>{{ $item->waktu_selesai }}</td>
+                                <td>{{ $item->status }}</td>
+                                @php
+                                        $current = Carbon\Carbon::now();
+                                        $finishTime = Carbon\Carbon::parse($item->waktu_selesai);
+                                        $diff = $current->diffInHours($finishTime, false);
+                                @endphp
+                                <td class="{{ (($diff) <= 0) ? "text-danger" : "text-dark" }}">
+                                {{ $diff }} Jam
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Selesai -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-success">Booking Selesai</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-hover table-striped mb-2 order-column">
+                        <thead>
+                            <tr>
+                                <th>No Invoice</th>
+                                <th>ID Armada</th>
+                                <th>Waktu Selesai</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bookSelesai as $item)
+                            <tr>
+                                <td>{{ $item->no_invoice }}</td>
+                                <td>{{ $item->armada_id }}</td>
+                                <td>{{ $item->waktu_mulai }}</td>
+                                <td>{{ $item->status }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking telat -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-danger">Booking Telat</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-hover table-striped mb-2 order-column">
+                        <thead>
+                            <tr>
+                                <th>No Invoice</th>
+                                <th>ID Armada</th>
+                                <th>Waktu Selesai</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bookTerlambat as $item)
+                            <tr>
+                                <td>{{ $item->no_invoice }}</td>
+                                <td>{{ $item->armada_id }}</td>
+                                <td>{{ $item->waktu_mulai }}</td>
+                                <td>{{ $item->status }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
     <!-- Content Row -->
     <div class="row">
 
@@ -225,9 +336,15 @@
 </div>
 <!-- /.container-fluid -->
 
+
 @endsection
 
 @section('bottom_links')
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
     {{-- <!-- start: JS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>

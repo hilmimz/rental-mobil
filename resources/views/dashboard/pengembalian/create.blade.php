@@ -1,9 +1,5 @@
 @extends('layouts.dashboard')
 
-@section('upper_links')
-    @include('partials.datatables_upper_links')
-@endsection
-
 @section('content')
         <!-- Table -->
         <div class="container mt-3 d-flex justify-content-center">
@@ -12,80 +8,93 @@
                     <h2 class="mt-0 mb-0" style="color: #fff; font-size: 22px;"><b>Silahkan Isi Data Berikut</b></h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pelanggan.store') }}">
+                    <form method="POST" action="{{ route('pengembalian.store') }}">
                         @csrf
                         {{-- <input type="hidden" value="{{ $nomor }}" name="nomor"> --}}
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">NIK :</label>
+                            <label for="" class="col-sm-2 col-form-label">ID Booking Armada :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" autocomplete="off" placeholder="Masukkan NIK" value="{{ old('nik') }}">
-                            </div>
-                            @error('nik')
-                                <div class="col-sm-2"></div>
-                                <div class="text-danger col-sm-10">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Nama :</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama"  placeholder="Masukkan Nama" autocomplete="off" value="{{ old('nama') }}">
-                            </div>
-                            @error('nama')
-                                <div class="col-sm-2"></div>
-                                <div class="text-danger col-sm-10">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Gender :</label>
-                            <div class="col-sm-10">
-                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin" aria-label="Default select example">
-                                    <option @if(!old('jenis_kelamin')) selected @endif value="">Pilih...</option>
-                                    <option @if(old('jenis_kelamin') == "L") selected @endif value="L">L</option>
-                                    <option @if(old('jenis_kelamin') == "P") selected @endif value="P">P</option>
+                                <select class="form-select  @error('booking_armada_id') is-invalid @enderror" aria-label="Default select example" name="booking_armada_id">
+                                    <option @if(!old('booking_armada_id')) selected @endif >Pilih Booking ID</option>
+                                    @foreach ($bookingIDs as $bookingID)
+                                    <option @if(old('booking_armada_id') == $bookingID->id) selected @endif value="{{ $bookingID->id }}">{{ $bookingID->id }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('jenis_kelamin')
+                            @error('booking_armada_id')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Tgl Lahir :</label>
+                            <label for="" class="col-sm-2 col-form-label">Waktu Pengembalian :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"  
-                                    placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_lahir') }}">
+                                @php
+                                    $current = Carbon\Carbon::now();
+                                @endphp
+                                <input disabled type="datetime" name="waktu_pengembalian" class="form-control" id="waktu_pengembalian"  placeholder="Masukkan Waktu Pengembalian" autocomplete="off"  value="{{ $current }}">
                             </div>
-                            @error('tgl_lahir')
+                            {{-- @error('waktu_pengembalian')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="mb-3 mt-4 row">
+                            <label for="" class="col-sm-2 col-form-label">Kondisi :</label>
+                            <div class="col-sm-10">
+                                <select class="form-select  @error('kondisi') is-invalid @enderror" aria-label="Default select example" name="kondisi">
+                                    <option @if(!old('kondisi')) selected @endif value="">Pilih Kondisi</option>
+                                    <option @if(old('kondisi') == "Bagus") selected @endif value="Bagus">Bagus</option>
+                                    <option @if(old('kondisi') == "Kurang Bagus") selected @endif value="Kurang Bagus">Kurang Bagus</option>
+                                    <option @if(old('kondisi') == "Rusak") selected @endif value="Rusak">Rusak</option>
+                                </select>
+                            </div>
+                            @error('kondisi')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Alamat :</label>
+                            <label for="" class="col-sm-2 col-form-label">Durasi Telat :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat"  placeholder="Masukkan Alamat" autocomplete="off" value="{{ old('alamat') }}">
+                                <input disabled type="number" name="durasi_telat" class="form-control @error('durasi_telat') is-invalid @enderror" id="durasi_telat"  placeholder="Terisi Otomatis" autocomplete="off">
                             </div>
-                            @error('alamat')
+                            @error('durasi_telat')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">No Telp :</label>
+                            <label for="" class="col-sm-2 col-form-label">Denda :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" id="no_telepon"  placeholder="Masukkan No. Telp" autocomplete="off" value="{{ old('no_telepon') }}">
+                                <input type="number" name="denda" class="form-control @error('denda') is-invalid @enderror" id="denda"  placeholder="Masukkan Denda" autocomplete="off"  value="{{ old('denda') }}">
                             </div>
-                            @error('no_telepon')
+                            @error('denda')
+                                <div class="col-sm-2"></div>
+                                <div class="text-danger col-sm-10">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 mt-4 row">
+                            <label for="" class="col-sm-2 col-form-label">Keterangan :</label>
+                            <div class="col-sm-10">
+                                <input type="string" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"  placeholder="Masukkan keterangan" autocomplete="off"  value="{{ old('keterangan') }}">
+                            </div>
+                            @error('keterangan')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
@@ -98,7 +107,7 @@
                                 <button type="submit" name="aksi" value="tambah" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <a href="{{ route('pelanggan.index') }}" type="button" class="btn btn-danger">
+                                <a href="{{ route('pengembalian.index') }}" type="button" class="btn btn-danger">
                                     Cancel 
                                 </a>
                             </div>
@@ -109,8 +118,4 @@
         </div>
         <!-- End Table -->
 
-@endsection
-
-@section('bottom_links')
-    @include('partials.datatables_bottom_links')
 @endsection
