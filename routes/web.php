@@ -47,10 +47,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('pengembalian', PengembalianController::class);
 
+    Route::get('/exportpdf', [BookingController::class, 'exportpdf'])->name('exportpdf');
+
+    Route::get('/exportexcel', [BookingController::class, 'exportexcel'])->name('exportexcel');
+
 });
 
-// Route::post('indexNew', function(){ return 'memek';});
-// tambahin
 
 
 Auth::routes();

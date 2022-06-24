@@ -79,6 +79,7 @@ class PembayaranController extends Controller
      */
     public function edit(Pembayaran $pembayaran)
     {
+        $this->authorize('superadmin');
         return view('dashboard.pembayaran.edit', [
             'pembayarans' => $pembayaran,
             'bookings' => Booking::orderBy('no_invoice')->get()
@@ -116,6 +117,9 @@ class PembayaranController extends Controller
      */
     public function destroy(Pembayaran $pembayaran)
     {
+
+
+        $this->authorize('superadmin');
         //delete can only be done if its Booking status is "Tidak aktif"
         if($pembayaran->booking->status == "Tidak aktif"){
             $pembayaran->delete();
@@ -123,5 +127,6 @@ class PembayaranController extends Controller
         } else {
             return redirect (route('pembayaran.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if its Booking's status is \"Tidak aktif\"!");
         }
+
     }
 }

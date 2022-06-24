@@ -71,6 +71,7 @@ class MerkController extends Controller
     public function edit($id)
     {
         $merks = Merk::find($id);
+        $this->authorize('superadmin');
         return view('dashboard.merk.edit', compact('merks'));
     }
 
@@ -104,6 +105,7 @@ class MerkController extends Controller
     public function destroy(Merk $merk)
     {
 
+        $this->authorize('superadmin');
         //delete can only be done if there are no Armada related to this Merk
         if($merk->armadas->isEmpty()){
             $merk->delete();
@@ -114,5 +116,6 @@ class MerkController extends Controller
 
         // $merk->delete();
         // return redirect (route('merk.index'))->with('success_remove', 'Data has been removed succesfully!');
+
     }
 }

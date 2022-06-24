@@ -100,6 +100,7 @@ class BookingArmadaController extends Controller
      */
     public function edit(BookingArmada $bookingArmada)
     {
+        $this->authorize('superadmin');
         return view('dashboard.booking_armada.edit', [
             'armadas' => Armada::orderBy('plat_nomor')->get(),
             'bookings' => Booking::orderBy('no_invoice')->get(),
@@ -142,11 +143,14 @@ class BookingArmadaController extends Controller
      */
     public function destroy(BookingArmada $bookingArmada)
     {
+
+        $this->authorize('superadmin');
         if($bookingArmada->booking->status == "Tidak aktif"){
             $bookingArmada->delete();
             return redirect (route('booking_armada.index'))->with('success_remove', 'Data has been removed succesfully!');
         } else {
             return redirect (route('booking_armada.index'))->with('fail_remove', "Failed to delete: delete can only be performed only if its Booking's status is \"Tidak aktif\"!");
         }
+
     }
 }

@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Pelanggan;
+
+use Excel;
+use PDF;
+use App\Exports\BookingExport;
+
 use App\Models\BookingArmada;
+
 
 class BookingController extends Controller
 {
@@ -134,6 +140,7 @@ class BookingController extends Controller
     {
         $pelanggans = Pelanggan::all();
         $bookings = $booking;
+        $this->authorize('superadmin');
         return view('dashboard.booking.edit', compact('bookings', 'pelanggans'));
     }
 
@@ -176,6 +183,8 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
+        $this->authorize('superadmin');    
+    
         //delete related Pembayaran
         foreach($booking->pembayarans as $p){
             $p->delete();
@@ -196,7 +205,18 @@ class BookingController extends Controller
 
         //finally delete this Booking
         $booking->delete();
-
         return redirect (route('booking.index'))->with('success_remove', 'data has been removed succesfully!');
+    }
+
+    public function exportpdf(){
+        $bookings = Booking::all();
+
+        view()->share('bookings', $bookings);
+        $pdf = PDF::loadview('dashboard.booking.databooking-pdf');
+        return $pdf->download('dataBooking.pdf');
+    }
+
+    public function exportexcel(){
+        return Excel::download(new BookingExport, 'dataBooking.xlsx');
     }
 }

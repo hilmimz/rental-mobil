@@ -58,12 +58,15 @@
                         <td>{{ $bookingArmada->status }}</td>
                         <td>
                             <div class="d-flex justify-content-around">
+                                @can('superadmin')
                                 <a href="{{ route('booking_armada.edit', $bookingArmada->id) }}" type="button" class="btn btn-primary btn-sm">
                                     <i class="ri-pencil-fill "></i>
                                 </a>
+                                @endcan
                                 <a href="{{ route('booking_armada.show', $bookingArmada->id) }}" type="button" class="btn btn-info btn-sm">
                                     <i class="ri-eye-line "></i>
                                 </a>
+                                @can('superadmin')
                                 <form action="{{ route('booking_armada.destroy', $bookingArmada->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -71,6 +74,7 @@
                                         <i class="ri-delete-bin-fill"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>
