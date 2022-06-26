@@ -6,6 +6,7 @@ use App\Models\BookingArmada;
 use App\Models\Booking;
 use App\Models\Armada;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use DateTime;
 use DateInterval;
@@ -79,6 +80,8 @@ class BookingArmadaController extends Controller
         $waktu_selesai = new DateTime($validatedRequest['waktu_mulai']);
         $waktu_selesai->add( new DateInterval("PT" . $validatedRequest['durasi_jam'] . "H"));
         $validatedRequest['waktu_selesai'] = $waktu_selesai;
+        $validatedRequest['created_by'] = Auth::user()->email;
+
 
 
 

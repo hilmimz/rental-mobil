@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Pelanggan;
+use Illuminate\Support\Facades\Auth;
 
 use Excel;
 use PDF;
@@ -99,18 +100,19 @@ class BookingController extends Controller
             'keterangan' => ''
         ];
 
-        $validateRequest = $request->validate($rules);
+        $validatedRequest = $request->validate($rules);
 
-        // $validateRequest['tgl_transaksi'] = now();
-        $validateRequest['rental_total'] = 0;
-        $validateRequest['denda_total'] = 0;
-        $validateRequest['harga_total'] = 0;
-        $validateRequest['sisa_pembayaran'] = 10;
-        $validateRequest['status_pembayaran'] = 'x';
-        $validateRequest['status_pengembalian'] = 'x';
-        $validateRequest['status'] = 'x';
+        // $validatedRequest['tgl_transaksi'] = now();
+        $validatedRequest['rental_total'] = 0;
+        $validatedRequest['denda_total'] = 0;
+        $validatedRequest['harga_total'] = 0;
+        $validatedRequest['sisa_pembayaran'] = 10;
+        $validatedRequest['status_pembayaran'] = 'x';
+        $validatedRequest['status_pengembalian'] = 'x';
+        $validatedRequest['status'] = 'x';
+        $validatedRequest['created_by'] = Auth::user()->email;
 
-        $bookings = Booking::create($validateRequest);
+        $bookings = Booking::create($validatedRequest);
         Booking::synchronizeAll();
 
         return redirect(route('booking.index'))->with('success_create', 'Data has been added sucessfully!');
@@ -165,9 +167,9 @@ class BookingController extends Controller
             $rules['no_invoice'] .= '|unique:bookings'; // tambahin rule biar value harus unique berdasarkan tabel armadas
         }
 
-        $validateRequest = $request->validate($rules);
+        $validatedRequest = $request->validate($rules);
 
-        $booking ->update($validateRequest);
+        $booking ->update($validatedRequest);
 
         return redirect(route('booking.index'))->with('success_edit', 'Data has been edited sucessfully!');
     }
@@ -213,6 +215,15 @@ class BookingController extends Controller
         view()->share('bookings', $bookings);
         $pdf = PDF::loadview('dashboard.booking.databooking-pdf');
         return $pdf->download('dataBooking.pdf');
+    }
+
+    public function exportpdfBooking(Request $request){
+        $booking = Booking::find($request->input('id'));
+        // dd($booking);
+
+        view()->share('booking', $booking);
+        $pdf = PDF::loadview('dashboard.booking.invoice');
+        return $pdf->download("rental_mobil_gg_invoice_{$booking->no_invoice}.pdf");
     }
 
     public function exportexcel(){

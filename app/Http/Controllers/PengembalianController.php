@@ -9,6 +9,8 @@ use App\Models\Booking;
 use App\Models\Armada;
 use App\Models\Pengembalian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PengembalianController extends Controller
 {
@@ -51,6 +53,7 @@ class PengembalianController extends Controller
         ];
 
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['created_by'] = Auth::user()->email;
 
         // dd(BookingArmada::find($request->input('booking_armada_id')));
         $finishTime = new DateTime(BookingArmada::find($request->input('booking_armada_id'))->waktu_selesai);
@@ -97,6 +100,7 @@ class PengembalianController extends Controller
     public function edit(Pengembalian $pengembalian)
     {
         $bookingIDs = BookingArmada::all();/* where('status','=','Aktif')->orwhere('status','=','Telat')->get(); */
+        $this->authorize('superadmin'); 
         return view('dashboard.pengembalian.edit', compact([
             'pengembalian',
             'bookingIDs'
@@ -140,6 +144,7 @@ class PengembalianController extends Controller
      */
     public function destroy(Pengembalian $pengembalian)
     {
+        $this->authorize('superadmin'); 
         $pengembalian->delete();
         return redirect (route('pengembalian.index'))->with('success_remove', 'Data has been removed succesfully!');
     }

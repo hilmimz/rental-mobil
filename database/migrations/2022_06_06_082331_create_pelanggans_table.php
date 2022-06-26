@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->string('alamat', 100);
             $table->string('no_telepon', 20);
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

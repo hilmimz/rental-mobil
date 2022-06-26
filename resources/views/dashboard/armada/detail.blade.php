@@ -69,7 +69,7 @@
                         <div class="mb-3 mt-4 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Tersedia :</label>
                             <div class="col-sm-10">
-                                <input disabled type="text" name="tersedia" class="form-control " value="{{ $armada->tersedia }}">
+                                <input disabled type="text" name="tersedia" class="form-control " value="{{ ($armada->tersedia)? 'Ya' : 'Tidak' }}">
                             </div>
                         </div>
 
@@ -85,6 +85,12 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Created At :</label>
                             <div class="col-sm-10">
                                 <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $armada->created_at }}">
+                            </div>
+                        </div>
+                        <div class="mb-3 mt-4 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Created By :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $armada->created_by }}">
                             </div>
                         </div>
     

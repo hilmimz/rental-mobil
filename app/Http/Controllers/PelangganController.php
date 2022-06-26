@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelanggan;
+use Illuminate\Support\Facades\Auth;
 
 class PelangganController extends Controller
 {
@@ -46,6 +47,7 @@ class PelangganController extends Controller
             'no_telepon' => 'required'
         ];
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['created_by'] = Auth::user()->email;
 
         Pelanggan::create($validatedRequest);
 

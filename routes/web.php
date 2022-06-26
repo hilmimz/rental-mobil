@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/exportpdf', [BookingController::class, 'exportpdf'])->name('exportpdf');
 
+    Route::get('/exportpdfBooking', [BookingController::class, 'exportpdfBooking'])->name('exportpdfBooking');
+
     Route::get('/exportexcel', [BookingController::class, 'exportexcel'])->name('exportexcel');
 
 });

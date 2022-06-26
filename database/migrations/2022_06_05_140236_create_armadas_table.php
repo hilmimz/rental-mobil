@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('harga_tiga_jam');
             $table->boolean('tersedia');
             $table->string('bahan_bakar', 20);
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

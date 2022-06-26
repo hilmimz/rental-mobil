@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 100)->unique();
             $table->string('produsen', 100);
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

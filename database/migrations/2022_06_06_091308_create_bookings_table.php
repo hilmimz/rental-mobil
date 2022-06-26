@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('no_invoice', 20)->unique();
             $table->text('keterangan')->nullable();
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

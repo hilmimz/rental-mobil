@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('jumlah_bayar');
             $table->string('cara_pembayaran');
             $table->string('tipe_pembayaran');
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

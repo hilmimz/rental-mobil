@@ -13,6 +13,7 @@ use Carbon\Carbon;
 class DashboardController extends Controller
 {
     public function index(){
+
         //Data booking
         $countBooking = Booking::all()->count();
         //Data Mobil
@@ -41,24 +42,35 @@ class DashboardController extends Controller
                 $bookingArr[$i] = 0;    
             }
         }
-        //END-Chart Transaksi Booking
 
-        //Function Call
-        $bookAktif = $this->bookingAktif();
-        $bookSelesai = $this->bookingSelesai();
-        $bookTerlambat = $this->bookingTerlambat();
-        //END-Function Call
 
-        //Return
-        return view('dashboard.index', compact([
-            'bookAktif',
-            'bookSelesai',
-            'bookTerlambat',
-            'bookingArr',
-            'countBooking',
-            'countArmada',
-            'countPelanggan'
-        ]));
+        $bookings_telat = [];
+        $bookings_tidak_aktif = [];
+        foreach(Booking::all() as $booking){
+            if($booking->status == "Tidak aktif"){
+                array_push($bookings_tidak_aktif, $booking);
+                // break;
+            } else {
+                foreach($booking->booking_armadas as $ba){
+                    if($ba->status == "Telat"){
+                        array_push($bookings_telat, $booking);
+                        // break;
+                    }
+                }
+
+            }
+            
+        }
+
+        return view('dashboard.index', [
+            'bookings_telat' => $bookings_telat,
+            'bookings_tidak_aktif' => $bookings_tidak_aktif,
+            'bookingArr' => $bookingArr,
+            'countBooking' => $countBooking,
+            'countArmada' => $countArmada,
+            'countPelanggan' => $countPelanggan 
+        ]);
+
     }
 
     public function rightJoin(){
