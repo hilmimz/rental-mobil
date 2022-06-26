@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Merk;
+use Illuminate\Support\Facades\Auth;
 
 class MerkController extends Controller
 {
@@ -42,6 +43,7 @@ class MerkController extends Controller
         ];
 
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['created_by'] = Auth::user()->email;
 
         $merks = Merk::create($validatedRequest);
 

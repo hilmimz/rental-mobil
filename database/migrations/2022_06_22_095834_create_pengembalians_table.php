@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('durasi_telat');
             $table->integer('denda');
             $table->text('keterangan')->nullable();
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

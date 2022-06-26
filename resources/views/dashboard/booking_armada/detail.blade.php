@@ -68,7 +68,7 @@
                         <label for="inputPassword" class="col-sm-2 col-form-label">Status :</label>
                         <div class="col-sm-10">
                             <input disabled type="text" name="status" class="form-control" 
-                                id="pelanggan_id"  autocomplete="off" value="{{ $booking_armada->harga }}">
+                                id="pelanggan_id"  autocomplete="off" value="{{ $booking_armada->status }}">
                         </div>
                     </div>                        
                     
@@ -79,6 +79,13 @@
                                 id="pelanggan_id"  autocomplete="off" value="{{ $booking_armada->created_at }}">
                         </div>
                     </div>
+                    <div class="mb-3 mt-4 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Created By :</label>
+                        <div class="col-sm-10">
+                            <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $booking_armada->created_by }}">
+                        </div>
+                    </div>
+
                     <div class="mb-3 row mt-4">
                         <div class="col">
                             <a href="{{ route('booking_armada.index') }}" type="button" class="btn btn-primary">

@@ -68,7 +68,7 @@
                         <th>Tgl Transaksi</th>
                         {{-- <th>Armada</th> --}}
                         <th>Harga Total</th>
-                        <th>Sisa pembayaran</th>
+                        <th>Sisa Pembayaran</th>
                         <th>Status Pembayaran</th>
                         <th>Status Pengembalian</th>
                         <th>Status</th>

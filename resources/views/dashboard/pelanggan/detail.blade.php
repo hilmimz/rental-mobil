@@ -51,6 +51,19 @@
                                 <input disabled type="text" name="no_telepon" class="form-control" id="no_telepon" autocomplete="off" value="{{ $pelanggan->no_telepon }}">
                             </div>
                         </div>
+
+                        <div class="mb-3 mt-4 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Created At :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $pelanggan->created_at }}">
+                            </div>
+                        </div>
+                        <div class="mb-3 mt-4 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Created By :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $pelanggan->created_by }}">
+                            </div>
+                        </div>
     
                         <div class="mb-3 row mt-4">
                             <div class="col">

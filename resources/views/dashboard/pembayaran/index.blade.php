@@ -54,19 +54,23 @@
                         <td>{{ $pembayaran->tipe_pembayaran }}</td>
                         <td>
                             <div class="d-flex justify-content-around">
-                                <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" type="button" class="btn btn-primary btn-sm">
-                                    <i class="ri-pencil-fill "></i>
-                                </a>
+                                @can('superadmin')
+                                    <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" type="button" class="btn btn-primary btn-sm">
+                                        <i class="ri-pencil-fill "></i>
+                                    </a>
+                                @endcan
                                 <a href="{{ route('pembayaran.show', $pembayaran->id) }}" type="button" class="btn btn-info btn-sm">
                                     <i class="ri-eye-line "></i>
                                 </a>
-                                <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
-                                        <i class="ri-delete-bin-fill"></i>
-                                    </button>
-                                </form>
+                                @can('superadmin')
+                                    <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are You Sure Want to Delete this List?')">
+                                            <i class="ri-delete-bin-fill"></i>
+                                        </button>
+                                    </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>

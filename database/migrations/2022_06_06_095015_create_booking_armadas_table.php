@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('durasi_jam');
             $table->integer('harga');
             $table->string('status', 20);
+            $table->string('created_by')->default('ivandrafawwaz@gmail.com');
             $table->timestamps();
         });
     }

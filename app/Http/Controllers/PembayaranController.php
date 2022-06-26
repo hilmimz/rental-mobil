@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
+
 
 class PembayaranController extends Controller
 {
@@ -51,6 +53,7 @@ class PembayaranController extends Controller
         ];
 
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['created_by'] = Auth::user()->email;
         // $validatedRequest['tgl_pembayaran'] = now();
 
         Pembayaran::create($validatedRequest);
