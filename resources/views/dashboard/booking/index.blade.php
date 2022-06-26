@@ -24,36 +24,37 @@
             Tambahkan Data Booking
         </a>
 
-        <br><br>
-        <a href="/exportpdf" type="button" class="btn btn-danger mt-4 shadow-lg">
-            Export PDF
-        </a>
-        <a href="/exportexcel" type="button" class="btn btn-success mt-4 shadow-lg">
-            Export Excel
-        </a>
-
+        
 
         
         <div class="d-flex flex-column justify-content-center">
-            <p class="mx-2">Lihat berdasarkan rentang waktu: </p> 
+            <p class="mx-2 mt-4">Lihat berdasarkan rentang waktu: </p> 
             <form action="booking" method="GET">
                 {{-- @csrf --}}
                 {{-- @method('POST') --}}
                 <div class="d-flex justify-content-center">
-                    <label for="from_date">Dari (YYYY-MM-DD):</label>
-                    <input type="text" class="form-control col-xs-2" name="from_date" placeholder="e.g. 2001-01-01" style="width:140px"
+                    <label class="col-form-label" for="from_date">Dari (YYYY-MM-DD):</label>
+                    <input type="text" class="form-control me-3 ms-2 align-content-lg-center " name="from_date" placeholder="e.g. 2001-01-01" style="width:140px"
                         value="{{ $from_date }}">
                         {{-- @dd($request); --}}
-
-                </div>
-                <div class="d-flex justify-content-center">
-                    <label for="to_date">Sampai (YYYY-MM-DD):</label>
-                    <input type="text" class="form-control" name="to_date" placeholder="e.g. 2010-02-03" style="width:140px"
+                    <label class="col-form-label"  for="to_date">Sampai (YYYY-MM-DD):</label>
+                    <input type="text" class="form-control  me-3 ms-2" name="to_date" placeholder="e.g. 2010-02-03" style="width:140px"
                         value="{{ $to_date }}">
+                        <div>
+                            <button type="submit" class="btn btn-primary col-form-label">Cari</button>
+                        </div>
+                        
                 </div>
-
-                <button type="submit" class="btn btn-primary">Cari</button>
+                
             </form>
+        </div>
+        <div class="mb-2">
+            <a href="/exportpdf" type="button" class="btn btn-danger mt-4 shadow-lg">
+                Export PDF
+            </a>
+            <a href="/exportexcel" type="button" class="btn btn-success mt-4 shadow-lg">
+                Export Excel
+            </a>
         </div>
 
 
