@@ -80,10 +80,15 @@ class PembayaranController extends Controller
     public function edit(Pembayaran $pembayaran)
     {
         $this->authorize('superadmin');
-        return view('dashboard.pembayaran.edit', [
-            'pembayarans' => $pembayaran,
-            'bookings' => Booking::orderBy('no_invoice')->get()
-        ]);
+
+        if($pembayaran->booking->status_pembayaran != "Belum lunas"){
+            return redirect(route('pembayaran.index'))->with("fail_edit", "Data can only be editted if its Booking's status pembayaran is \"Belum lunas\"!");
+        } else { 
+            return view('dashboard.pembayaran.edit', [
+                'pembayarans' => $pembayaran,
+                'bookings' => Booking::orderBy('no_invoice')->get()
+            ]);
+        }
     }
 
     /**
@@ -96,15 +101,16 @@ class PembayaranController extends Controller
     public function update(Request $request, Pembayaran $pembayaran)
     {   
         $rules = [
-            'booking_id' => 'required',
-            'tgl_pembayaran' => 'required',
-            'jumlah_bayar' => 'required|integer|min:3',    
+            'tgl_pembayaran' => 'required|date|date_format:Y-m-d',
+            'jumlah_bayar' => 'required|integer|min:1',    
             'cara_pembayaran' => 'required',
             'tipe_pembayaran' => 'required',
         ];
 
+        
         $validatedRequest = $request->validate($rules);
         Pembayaran::where('id', $pembayaran->id)->update($validatedRequest);
+        Booking::synchronizeAll();
 
         return redirect (route ('pembayaran.index'))->with('success_edit', 'Data has been edited succesfully!');
     }

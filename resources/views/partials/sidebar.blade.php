@@ -13,13 +13,13 @@
             </li>
             <!-- master data -->
 
-            <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Features</li>
+            {{-- <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Features</li>
                 <li class="sidebar-menu-item {{ Request::is('#') ? 'active' : '' }}">
                     <a href="#">
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
                             Backup Database                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="sidebar-menu-item {{ Request::is('pelanggan') ? 'active' : '' }}">
                     <a href="#">
                         <i class="ri-user-line sidebar-menu-item-icon"></i>
@@ -74,7 +74,7 @@
                 </li>
                 <li class="sidebar-menu-item {{ Request::is('pengembalian') ? 'active' : '' }}">
                     <a href="/pengembalian">
-                        <i class="ri-bill-line sidebar-menu-item-icon"></i>
+                        <i class="ri-home-3-fill sidebar-menu-item-icon"></i>
                             Data Pengembalian                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                     </a>
                 </li>

@@ -15,6 +15,7 @@ class ArmadaController extends Controller
      */
     public function index()
     {   
+        Armada::synchronizeTersedia();
         $armadas = Armada::with('merk')->get();
         return view('dashboard.armada.index', compact('armadas'));
     }
@@ -38,20 +39,20 @@ class ArmadaController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
             'merk_id' => 'required',
             'jenis' => 'required',
             'plat_nomor' => 'required|unique:armadas',    
-            // 'waktu_selesai' => "required|gt:$request->waktu_mulai", diputer jir format waktunya jadi ngaco
             'transmisi' => "required",
-            'tgl_pajak' => 'required',
+            'tgl_pajak' => 'required|date|date_format:Y-m-d',
             'thn_beli' => 'required|integer',
             'harga_tiga_jam' => 'required|integer',
-            'tersedia' => 'required',  
             'bahan_bakar' => 'required'   
         ];
 
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['tersedia'] = true;
         $armada = Armada::create($validatedRequest);
 
         return redirect(route('armada.index'))->with('success_create', 'Data has been added succesfully!');
@@ -98,7 +99,6 @@ class ArmadaController extends Controller
             'tgl_pajak' => 'required',
             'thn_beli' => 'required|integer',
             'harga_tiga_jam' => 'required|integer',
-            'tersedia' => 'required',
             'bahan_bakar' => 'required'
         ];
 

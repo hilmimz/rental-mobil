@@ -15,7 +15,10 @@
     
 @elseif(session()->has('fail_remove'))
     <div class="alert alert-danger mt-3" role="alert">{{ session('fail_remove') }}</div>
+@elseif(session()->has('fail_edit'))
+    <div class="alert alert-danger mt-3" role="alert">{{ session('fail_edit') }}</div>
 @endif
+
 <!-- Table  -->
 <div>
     <!-- Typography -->

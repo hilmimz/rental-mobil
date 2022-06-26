@@ -12,12 +12,15 @@
                         @csrf
                         {{-- <input type="hidden" value="{{ $nomor }}" name="nomor"> --}}
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">ID Booking Armada :</label>
+                            <label for="" class="col-sm-2 col-form-label">BookingArmada yang berstatus "Aktif" atau "Telat" :</label>
                             <div class="col-sm-10">
                                 <select class="form-select  @error('booking_armada_id') is-invalid @enderror" aria-label="Default select example" name="booking_armada_id">
-                                    <option @if(!old('booking_armada_id')) selected @endif >Pilih Booking ID</option>
+                                    <option @if(!old('booking_armada_id')) selected @endif value="">Pilih BookingArmada</option>
                                     @foreach ($bookingIDs as $bookingID)
-                                    <option @if(old('booking_armada_id') == $bookingID->id) selected @endif value="{{ $bookingID->id }}">{{ $bookingID->id }}</option>
+                                        <option @if(old('booking_armada_id') == $bookingID->id) selected @endif value="{{ $bookingID->id }}">
+                                            {{ $bookingID->booking->no_invoice . ' & ' . $bookingID->armada->plat_nomor . '; waktu selesai: ' . $bookingID->waktu_selesai }}
+                                            {{ ($bookingID->status == "Telat") ? '; Telat' : '' }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -32,17 +35,15 @@
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Waktu Pengembalian :</label>
                             <div class="col-sm-10">
-                                @php
-                                    $current = Carbon\Carbon::now();
-                                @endphp
-                                <input disabled type="datetime" name="waktu_pengembalian" class="form-control" id="waktu_pengembalian"  placeholder="Masukkan Waktu Pengembalian" autocomplete="off"  value="{{ $current }}">
+                                <input type="text" name="waktu_pengembalian" class="form-control" id="waktu_pengembalian"   
+                                    placeholder="Format: TTTT-BB-HH JJ:MM, contoh: 2022-01-02 10:00" autocomplete="off" value="{{ old('waktu_pengembalian') }}">
                             </div>
-                            {{-- @error('waktu_pengembalian')
+                            @error('waktu_pengembalian')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         <div class="mb-3 mt-4 row">

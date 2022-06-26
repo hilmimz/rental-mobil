@@ -15,6 +15,8 @@
 
 @elseif(session()->has('fail_remove'))
     <div class="alert alert-danger mt-3" role="alert">{{ session('fail_remove') }}</div>
+@elseif(session()->has('fail_edit'))
+    <div class="alert alert-danger mt-3" role="alert">{{ session('fail_edit') }}</div>
 @endif
 
 
@@ -26,6 +28,20 @@
         <a href="{{ route('booking_armada.create') }}" type="button" class="btn btn-secondary mt-4 shadow-lg">
             Tambahkan Data Booking Armada
         </a>
+        @if($filter)
+            <div class="">
+                <a href="{{ route('booking_armada.index') }}" type="button" class="btn btn-info mt-4 shadow-lg">
+                    Unfilter
+                </a>
+            </div>
+        @else
+            <form action="{{ route('booking_armada.index') }}" method="get">
+                <input hidden type="number" value="1" name="telat">
+                <button type="submit" class="btn btn-info mt-4 shadow-lg">
+                    Filter telat
+                </button>
+            </form>
+        @endif
 
         <div class="container table-responsive mt-4">
             <table id="dt" class="table table-hover table-striped pt-2 mb-2 order-column ">

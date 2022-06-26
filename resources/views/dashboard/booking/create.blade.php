@@ -31,7 +31,7 @@
             <label for="pelanggan_id" class="col-sm-2 col-form-label">Pelanggan</label>
             <div class="col-sm-10">
               <select class="form-control" name="pelanggan_id" id="pelanggan_id">
-                <option {{ (old('pelanggan_id')) ? '' : 'selected'  }} value="">Pilih</option>
+                <option {{ (old('pelanggan_id')) ? '' : 'selected'  }} value="">Pilih Pelanggan</option>
                 @foreach ($pelanggans as $pelanggan)
                   <option {{ (old('pelanggan_id') == $pelanggan->id) ? 'selected' : ''  }} value="{{ $pelanggan->getKey() }}">{{ $pelanggan->nama }}</option>
                 @endforeach
@@ -49,7 +49,7 @@
             <label for="" class="col-sm-2 col-form-label">Tgl Transaksi :</label>
             <div class="col-sm-10">
               <input type="text" name="tgl_transaksi" class="form-control" id="tgl_transaksi"
-              placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_transaksi') }}">
+                placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_transaksi') }}">
             </div>
             @error('tgl_transaksi')
             <div class="col-sm-2"></div>

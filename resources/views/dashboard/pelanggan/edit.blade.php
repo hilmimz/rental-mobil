@@ -59,14 +59,15 @@
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Tgl Lahir :</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"  placeholder="Masukkan Tanggal Lahir" autocomplete="off" value="{{ old('tgl_lahir', $pelanggan->tgl_lahir) }}">
+                                <input type="text" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"  
+                                    placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_lahir', $pelanggan->tgl_lahir) }}">
                             </div>
                             @error('tgl_lahir')
                                 <div class="col-sm-2"></div>
                                 <div class="text-danger col-sm-10">
                                     {{ $message }}
                                 </div>
-                            @enderror
+                            @enderror 
                         </div>
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Alamat :</label>

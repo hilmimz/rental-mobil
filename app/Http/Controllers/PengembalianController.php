@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use DateTime;
 use App\Models\BookingArmada;
+use App\Models\Booking;
+use App\Models\Armada;
 use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 
@@ -27,7 +30,7 @@ class PengembalianController extends Controller
      */
     public function create()
     {
-        $bookingIDs = BookingArmada::where('status','=','Aktif')->orwhere('status','=','Telat')->get();
+        $bookingIDs = BookingArmada::where('status','=','Aktif')->orWhere('status','=','Telat')->get();
         return view('dashboard.pengembalian.create', compact('bookingIDs'));
     }
 
@@ -39,23 +42,37 @@ class PengembalianController extends Controller
      */
     public function store(Request $request)
     {   
-        $finishTime = BookingArmada::where('id','=', $request->get('booking_armada_id'))->pluck('waktu_selesai');
-        $current = Carbon::now();
-        $diff = $current->diffInHours($finishTime[0]);
-        
-        $durasi_telat = $diff;
         $rules = [
             'booking_armada_id' => 'required',
             'kondisi' => 'required',
             'denda' => 'required',
-            'keterangan' => 'string|nullable'
+            'keterangan' => 'string|nullable',
+            'waktu_pengembalian' => 'required|date|date_format:Y-m-d H:i'
         ];
 
         $validatedRequest = $request->validate($rules);
-        $validatedRequest['waktu_pengembalian'] = $current;
+
+        // dd(BookingArmada::find($request->input('booking_armada_id')));
+        $finishTime = new DateTime(BookingArmada::find($request->input('booking_armada_id'))->waktu_selesai);
+        $returnTime = new DateTime($validatedRequest['waktu_pengembalian']);
+
+        $diff = 0;
+        if($returnTime > $finishTime){ //dibalikin di atas waktu_selesai
+            $diffs = $returnTime->diff($finishTime);
+            $diff = ($diffs->m * 30 * 24) + ($diffs->d * 24) + $diffs->h;
+        }
+        
+        $durasi_telat = $diff;
+
+
+
+        // $validatedRequest['waktu_pengembalian'] = $current;
         $validatedRequest['durasi_telat'] = $durasi_telat;
 
         $pengembalians = Pengembalian::create($validatedRequest);
+        BookingArmada::synchronizeStatus();
+        Booking::synchronizeAll();
+        Armada::synchronizeTersedia();
 
         return redirect(route('pengembalian.index'))->with('success_create', 'Data has been added succesfully!');
     }

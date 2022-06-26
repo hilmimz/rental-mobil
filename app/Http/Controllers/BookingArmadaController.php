@@ -17,11 +17,20 @@ class BookingArmadaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        BookingArmada::synchronizeStatus();
+        $filter = false;
+        $bookingArmadas = BookingArmada::with(['armada', 'booking'])->get();
+        if($request->input('telat')){
+            $filter = true;
+            $bookingArmadas = BookingArmada::with(['armada', 'booking'])->where('status', 'Telat')->get();
+        } 
+
         return view('dashboard.booking_armada.index',[
             // 'bookingArmadas' => BookingArmada::with('booking')->get()
-            'bookingArmadas' => BookingArmada::with(['armada', 'booking'])->get()
+            'bookingArmadas' => $bookingArmadas,
+            'filter' => $filter
         ]);
     }
 
@@ -101,11 +110,17 @@ class BookingArmadaController extends Controller
     public function edit(BookingArmada $bookingArmada)
     {
         $this->authorize('superadmin');
-        return view('dashboard.booking_armada.edit', [
-            'armadas' => Armada::orderBy('plat_nomor')->get(),
-            'bookings' => Booking::orderBy('no_invoice')->get(),
-            'booking_armada' => $bookingArmada
-        ]);
+
+        if($bookingArmada->booking->status != "Tidak aktif"){
+            return redirect(route('booking_armada.index'))->with("fail_edit", "Data can only be editted if its Booking's status is \"Tidak aktif\"!");
+        } else { 
+            return view('dashboard.booking_armada.edit', [
+                'armadas' => Armada::orderBy('plat_nomor')->get(),
+                'bookings' => Booking::orderBy('no_invoice')->get(),
+                'booking_armada' => $bookingArmada
+            ]);
+        }
+
     }
 
     /**
@@ -119,19 +134,28 @@ class BookingArmadaController extends Controller
     {
         // dd($request);
         $rules = [
-            'booking_id' => 'required',
             'armada_id' => 'required',
-            'waktu_mulai' => 'required',    
-            // 'waktu_selesai' => "required|gt:$request->waktu_mulai", diputer jir format waktunya jadi ngaco
-            'waktu_selesai' => "required",
-            'durasi_jam' => 'required|integer|min:3',
-            'harga' => 'required|integer|min:1',
-            'status' => 'required',    
+            'waktu_mulai' => 'required|date|date_format:Y-m-d H:i',    
+            'durasi_jam' => 'required|integer|min:1',
         ];
 
+
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['durasi_jam'] *= 3;
+        $validatedRequest['status'] = "Aktif";
+        $validatedRequest['harga'] = $validatedRequest['durasi_jam'] * Armada::find($validatedRequest['armada_id'])->harga_tiga_jam;
+        
+        
+        $waktu_selesai = new DateTime($validatedRequest['waktu_mulai']);
+        $waktu_selesai->add( new DateInterval("PT" . $validatedRequest['durasi_jam'] . "H"));
+        $validatedRequest['waktu_selesai'] = $waktu_selesai;
+
+
 
         BookingArmada::where('id', $bookingArmada->id)->update($validatedRequest);
+        Booking::synchronizeAll();
+        Armada::synchronizeTersedia();
+        
         return redirect(route('booking_armada.index'))->with('success_edit', 'Data has been edited succesfully!');
     }
 

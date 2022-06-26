@@ -26,5 +26,22 @@ class BookingArmada extends Model
         return $this->hasOne(Pengembalian::class);
     }
 
+    public static function synchronizeStatus()
+    {
+        $all = BookingArmada::all();
+        foreach($all as $ba){
+            $status = "Aktif";
+            $p = $ba->pengembalian;
+            if($p != null){
+                $status = "Selesai";
+            } else if( now() > $ba->waktu_selesai ){
+                $status = "Telat";
+            }
+
+            $ba->update(['status' => $status]);
+        }
+
+    }
+
     
 }

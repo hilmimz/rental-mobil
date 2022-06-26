@@ -50,7 +50,8 @@
                         <div class="mb-3 mt-4 row">
                             <label for="" class="col-sm-2 col-form-label">Jumlah Bayar :</label>
                             <div class="col-sm-10">
-                                <input type="text" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" id="jumlah_bayar"  placeholder="Masukkan Jumlah Bayar" autocomplete="off" value="{{ old('tgl_pembayaran') }}">
+                                <input type="text" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" id="jumlah_bayar"  
+                                    placeholder="Masukkan Jumlah Bayar" autocomplete="off" value="{{ old('jumlah_bayar') }}">
                             </div>
                             @error('jumlah_bayar')
                                 <div class="col-sm-2"></div> {{-- dummy --}}

@@ -30,7 +30,7 @@
                 <thead style="font-size: 12px;" class="ungu">
                     <tr class="size">
                         <th>#</th>
-                        <th>ID Booking Armada</th>
+                        <th>Plat Nomor BookingArmada</th>
                         <th>Waktu Pengembalian</th>
                         <th>Kondisi</th>
                         <th>Durasi Telat</th>
@@ -45,7 +45,7 @@
                     @foreach($pengembalians as $pengembalian)
                     <tr class="size2 align-middle">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $pengembalian->booking_armada_id }}</td>
+                        <td>{{ $pengembalian->booking_armada->armada->plat_nomor }}</td>
                         <td>{{ $pengembalian->waktu_pengembalian }}</td>
                         <td>{{ $pengembalian->kondisi }}</td>
                         <td>{{ $pengembalian->durasi_telat }} Jam</td>

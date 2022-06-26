@@ -82,7 +82,8 @@
                         <div class="mb-3 mt-4 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Pajak :</label>
                             <div class="col-sm-10">
-                                <input type="date" name="tgl_pajak" class="form-control  @error('tgl_pajak') is-invalid @enderror" id="email"  placeholder="Masukkan Tanggal Pajak" autocomplete="off" value="{{ old('tgl_pajak') }}">
+                                <input type="text" name="tgl_pajak" class="form-control  @error('tgl_pajak') is-invalid @enderror" id="email"  
+                                    placeholder="Format: TTTT-BB-HH, contoh: 2022-01-02" autocomplete="off" value="{{ old('tgl_pajak') }}">
                             </div>
                             @error('tgl_pajak')
                                 <div class="col-sm-2"></div>
@@ -108,7 +109,7 @@
 
                         {{-- Harga --}}
                         <div class="mb-3 mt-4 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Harga :</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Harga per tiga jam :</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_tiga_jam" class="form-control  @error('harga_tiga_jam') is-invalid @enderror" id="email"  placeholder="Masukkan Harga" autocomplete="off" value="{{ old('harga_tiga_jam') }}">
                             </div>
@@ -120,12 +121,12 @@
                             @enderror
                         </div>
 
-                        {{-- Tersedia --}}
+                        {{-- Tersedia
                         <div class="mb-3 mt-4 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Tersedia :</label>
                             <div class="col-sm-10">
                                 <select class="form-select  @error('tersedia') is-invalid @enderror" aria-label="Default select example" name="tersedia">
-                                    <option @if(!old('tersedia')) selected @endif>Pilih Ketersediaan</option>
+                                    <option @if(!old('tersedia')) selected @endif value="">Pilih Ketersediaan</option>
                                     <option @if(old('tersedia') == "1") selected @endif value="1">Ya</option>
                                     <option @if(old('tersedia') == "0") selected @endif value="0">Tidak</option>
                                 </select>
@@ -136,7 +137,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         {{-- Bahan Bakar --}}
                         <div class="mb-3 mt-4 row">

@@ -74,7 +74,8 @@ class PelangganController extends Controller
     public function edit(Pelanggan $pelanggan)
     {
         $this->authorize('superadmin');
-        return view('dashboard.pelanggan.edit', ['pelanggan' => $pelanggan
+        return view('dashboard.pelanggan.edit', [
+            'pelanggan' => $pelanggan
         ]);
     }
 
@@ -91,13 +92,18 @@ class PelangganController extends Controller
             'nik' => 'required',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'tgl_lahir' => 'required',
+            'tgl_lahir' => 'required|date|date_format:Y-m-d',
             'alamat' => 'required',
             'no_telepon' => 'required'
         ];
+
+        if($request->input('nik') != $pelanggan->nik){
+            $rules['nik'] .= '|unique:pelanggans';
+        }
+
         $validatedRequest = $request->validate($rules);
 
-        Pelanggan::where('id', $pelanggan->id)->update($validatedRequest);
+        Pelanggan::find($pelanggan->id)->update($validatedRequest);
 
         return redirect (route ('pelanggan.index'))->with('success_edit', 'Data has been edited succesfully!');
 

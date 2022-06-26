@@ -91,7 +91,7 @@ class BookingController extends Controller
     //     'no_invoice' => 'required|unique:bookings',
     //     'keterangan' => 'required'
     //    ];
-    $rules = [
+        $rules = [
             'pelanggan_id' => 'required',   
             // 'tgl_transaksi' => 'regex:#^[0-9]{4}-[0-9]{2}-[0-9]{2}$#',
             'tgl_transaksi' => 'required|date|date_format:Y-m-d',
@@ -139,9 +139,8 @@ class BookingController extends Controller
     public function edit(Booking $booking)
     {
         $pelanggans = Pelanggan::all();
-        $bookings = $booking;
         $this->authorize('superadmin');
-        return view('dashboard.booking.edit', compact('bookings', 'pelanggans'));
+        return view('dashboard.booking.edit', compact('booking', 'pelanggans'));
     }
 
     /**
@@ -153,17 +152,17 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
+        // dd($request);
         $rules = [
-            'pelanggan_id' => 'required',
-            'tgl_transaksi' => 'required',
-            'harga_total' => 'required',
-            'status' => 'required',
+            'pelanggan_id' => 'required',   
+            // 'tgl_transaksi' => 'regex:#^[0-9]{4}-[0-9]{2}-[0-9]{2}$#',
+            'tgl_transaksi' => 'required|date|date_format:Y-m-d',
             'no_invoice' => 'required',
             'keterangan' => ''
         ];
 
         if($request->no_invoice != $booking->no_invoice){
-            $rules['no_invoice'] = $rules['no_invoice'] . '|unique:bookings'; // tambahin rule biar value harus unique berdasarkan tabel armadas
+            $rules['no_invoice'] .= '|unique:bookings'; // tambahin rule biar value harus unique berdasarkan tabel armadas
         }
 
         $validateRequest = $request->validate($rules);

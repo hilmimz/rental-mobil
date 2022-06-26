@@ -2,7 +2,7 @@
 <nav class="mb-4 px-3 py-2 bg-white rounded shadow">
     <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
     <h5 class="fw-bold mb-0 me-auto">Dashboard</h5>
-    <div class="dropdown me-3 d-none d-sm-block">
+    {{-- <div class="dropdown me-3 d-none d-sm-block">
         <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown" style="margin-right: -20px">
             <i class="ri-notification-line"></i>
         </div>
@@ -25,7 +25,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> --}}
     @guest
         <div class="d-flex flex-row w-10">
             @if (Route::has('login'))
@@ -39,10 +39,14 @@
     @else
     <div class="dropdown">
         <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-danger mx-2">Logout</button>
+            </form>
             <span class="me-2 d-none d-sm-block">{{ Auth::user()->name }}</span>
             <a href='https://www.instagram.com/fwz_ivdra/' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
         </div>
-        <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
+        {{-- <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
             <li>
                 <!-- <li class="sidebar-menu-item has-dropdown"></li> -->
                 <a class="dropdown-item" href="#">  
@@ -68,7 +72,7 @@
                 </form>
             </div>
             </li>
-        </ul>
+        </ul> --}}
     </div>
     @endguest
 </nav>
