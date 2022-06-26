@@ -20,6 +20,8 @@ class DashboardController extends Controller
         $countArmada = Armada::all()->count();
         //Data pelanggan
         $countPelanggan = Pelanggan::all()->count();
+        //Data Mobil Tersedia
+        $countArmadaTersedia = Armada::where('tersedia','=',1)->count();
 
         //Chart Transaksi Booking
         $bookingData = Booking::select('id', 'tgl_transaksi')
@@ -68,7 +70,8 @@ class DashboardController extends Controller
             'bookingArr' => $bookingArr,
             'countBooking' => $countBooking,
             'countArmada' => $countArmada,
-            'countPelanggan' => $countPelanggan 
+            'countPelanggan' => $countPelanggan,
+            'countArmadaTersedia' => $countArmadaTersedia
         ]);
 
     }
