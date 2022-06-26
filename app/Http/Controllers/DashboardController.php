@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BookingArmada;
 use App\Models\Booking;
+use App\Models\Armada;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -11,12 +13,36 @@ use Carbon\Carbon;
 class DashboardController extends Controller
 {
     public function index(){
-        
-        // $bookAktif = $this->bookingAktif();
-        // $bookSelesai = $this->bookingSelesai();
-        // $bookTerlambat = $this->bookingTerlambat();
-        // $dd = $this->rightJoin();
-        // dd($dd);
+
+        //Data booking
+        $countBooking = Booking::all()->count();
+        //Data Mobil
+        $countArmada = Armada::all()->count();
+        //Data pelanggan
+        $countPelanggan = Pelanggan::all()->count();
+
+        //Chart Transaksi Booking
+        $bookingData = Booking::select('id', 'tgl_transaksi')
+        ->get()
+        ->groupBy(function($date) {
+            return Carbon::parse($date->tgl_transaksi)->format('m');
+        });
+
+        $bookingmcount = [];
+        $bookingArr = [];
+
+        foreach ($bookingData as $key => $value) {
+            $bookingmcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($bookingmcount[$i])){
+                $bookingArr[$i] = $bookingmcount[$i];    
+            }else{
+                $bookingArr[$i] = 0;    
+            }
+        }
+
 
         $bookings_telat = [];
         $bookings_tidak_aktif = [];
@@ -38,8 +64,13 @@ class DashboardController extends Controller
 
         return view('dashboard.index', [
             'bookings_telat' => $bookings_telat,
-            'bookings_tidak_aktif' => $bookings_tidak_aktif
+            'bookings_tidak_aktif' => $bookings_tidak_aktif,
+            'bookingArr' => $bookingArr,
+            'countBooking' => $countBooking,
+            'countArmada' => $countArmada,
+            'countPelanggan' => $countPelanggan 
         ]);
+
     }
 
     public function rightJoin(){
@@ -70,11 +101,4 @@ class DashboardController extends Controller
 
         return $bookTerlambat;
     }
-
-    // public function reminder(){
-    //     $data = Booking::with('booking_armadas')->get();
-    //     $reminder = $data->where('status_pengembalian','=','Belum dikembalikan');
-
-    //     return $reminder;
-    // }
 }
