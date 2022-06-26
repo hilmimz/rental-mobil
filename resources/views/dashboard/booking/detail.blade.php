@@ -97,25 +97,30 @@
                                                             @if($ba->status == 'Selesai')
                                                                 <?php $p = $ba->pengembalian; ?>
                                                                 <li class="list-group-item">
-                                                                    <b class="mx-2">Waktu pengembalian: </b>
-                                                                    {{ $p->waktu_pengembalian }}
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <b class="mx-2">Kondisi pengembalian: </b>
-                                                                    {{ $p->kondisi }}
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <b class="mx-2">Keterlambatan pengembalian: </b>
-                                                                    {{ $p->durasi_telat . ' jam'}}
-                                                                    {{ ($p->durasi_telat < 24) ? '(di bawah 24 jam)' : '(di atas 24 jam)' }}
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <b class="mx-2">Denda: </b>
-                                                                    {{ 'Rp' . $p->denda }}
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <b class="mx-2">Keterangan pengembalian: </b>
-                                                                    {{ $p->keterangan }}
+                                                                    <b class="mx-2">Pengembalian: </b>
+                                                                    <ul class="list-group list-group-flush">
+                                                                        <li class="list-group-item">
+                                                                            <b class="mx-2">Waktu pengembalian: </b>
+                                                                            {{ $p->waktu_pengembalian }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b class="mx-2">Kondisi: </b>
+                                                                            {{ $p->kondisi }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b class="mx-2">Keterlambatan: </b>
+                                                                            {{ $p->durasi_telat . ' jam'}}
+                                                                            {{ ($p->durasi_telat < 24) ? '(di bawah 24 jam)' : '(di atas 24 jam)' }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b class="mx-2">Denda: </b>
+                                                                            {{ 'Rp' . $p->denda }}
+                                                                        </li>
+                                                                        <li class="list-group-item">
+                                                                            <b class="mx-2">Keterangan: </b>
+                                                                            {{ $p->keterangan }}
+                                                                        </li>
+                                                                    </ul>
                                                                 </li>
                                                             @endif
                                                         </ul>
@@ -177,6 +182,14 @@
                                     </ul>
                                 </li>
                             @endif
+                            <li class="list-group-item">
+                                <b class="mx-2">Created At: </b>
+                                {{ $booking->created_at }}
+                            </li>
+                            <li class="list-group-item">
+                                <b class="mx-2">Created By: </b>
+                                {{ $booking->created_by }}
+                            </li>
                         </ul>
                     </div>
                     <div class="mb-3 row mt-4">

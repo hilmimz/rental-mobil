@@ -12,16 +12,34 @@ class DashboardController extends Controller
 {
     public function index(){
         
-        $bookAktif = $this->bookingAktif();
-        $bookSelesai = $this->bookingSelesai();
-        $bookTerlambat = $this->bookingTerlambat();
+        // $bookAktif = $this->bookingAktif();
+        // $bookSelesai = $this->bookingSelesai();
+        // $bookTerlambat = $this->bookingTerlambat();
         // $dd = $this->rightJoin();
         // dd($dd);
-        return view('dashboard.index', compact([
-            'bookAktif',
-            'bookSelesai',
-            'bookTerlambat'
-        ]));
+
+        $bookings_telat = [];
+        $bookings_tidak_aktif = [];
+        foreach(Booking::all() as $booking){
+            if($booking->status == "Tidak aktif"){
+                array_push($bookings_tidak_aktif, $booking);
+                // break;
+            } else {
+                foreach($booking->booking_armadas as $ba){
+                    if($ba->status == "Telat"){
+                        array_push($bookings_telat, $booking);
+                        // break;
+                    }
+                }
+
+            }
+            
+        }
+
+        return view('dashboard.index', [
+            'bookings_telat' => $bookings_telat,
+            'bookings_tidak_aktif' => $bookings_tidak_aktif
+        ]);
     }
 
     public function rightJoin(){

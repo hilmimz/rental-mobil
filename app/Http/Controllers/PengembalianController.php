@@ -9,6 +9,8 @@ use App\Models\Booking;
 use App\Models\Armada;
 use App\Models\Pengembalian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PengembalianController extends Controller
 {
@@ -51,6 +53,7 @@ class PengembalianController extends Controller
         ];
 
         $validatedRequest = $request->validate($rules);
+        $validatedRequest['created_by'] = Auth::user()->email;
 
         // dd(BookingArmada::find($request->input('booking_armada_id')));
         $finishTime = new DateTime(BookingArmada::find($request->input('booking_armada_id'))->waktu_selesai);

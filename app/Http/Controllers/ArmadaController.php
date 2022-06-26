@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Armada;
 use App\Models\Merk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArmadaController extends Controller
 {
@@ -53,6 +54,7 @@ class ArmadaController extends Controller
 
         $validatedRequest = $request->validate($rules);
         $validatedRequest['tersedia'] = true;
+        $validatedRequest['created_by'] = Auth::user()->email;
         $armada = Armada::create($validatedRequest);
 
         return redirect(route('armada.index'))->with('success_create', 'Data has been added succesfully!');

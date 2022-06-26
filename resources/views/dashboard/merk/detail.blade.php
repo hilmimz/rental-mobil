@@ -40,8 +40,14 @@
                                 id="pelanggan_id"  autocomplete="off" value="{{ $merk->created_at }}">
                         </div>
                     </div>    
+                    <div class="mb-3 mt-4 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Created By :</label>
+                        <div class="col-sm-10">
+                            <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $merk->created_by }}">
+                        </div>
+                    </div>
                     
-                    @foreach($armadas as $armada)
+                    {{-- @foreach($armadas as $armada)
                     <div class="mb-3 mt-4 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">MOBIL:</label>
                         <div class="col-sm-10">
@@ -49,7 +55,7 @@
                                 id="pelanggan_id"  autocomplete="off" value="{{ $armada->plat_nomor }}">
                         </div>
                     </div>   
-                    @endforeach
+                    @endforeach --}}
                     
                 </div>
                 <a href="{{ route('merk.index') }}" type="button" class="btn btn-primary">

@@ -152,8 +152,9 @@
 
     {{-- Status Booking --}}
     <div class="row flex-wrap">
+
          <!-- Booking Aktif -->
-         <div class="col-xl-4 col-lg-5">
+         {{-- <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
                 <!-- Card Header-->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -192,10 +193,10 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Booking Selesai -->
-        <div class="col-xl-4 col-lg-5">
+        {{-- <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
                 <!-- Card Header-->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -225,7 +226,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Booking telat -->
         <div class="col-xl-4 col-lg-5">
@@ -236,26 +237,37 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <table class="table table-hover table-striped mb-2 order-column">
-                        <thead>
-                            <tr>
-                                <th>No Invoice</th>
-                                <th>ID Armada</th>
-                                <th>Waktu Selesai</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($bookTerlambat as $item)
-                            <tr>
-                                <td>{{ $item->no_invoice }}</td>
-                                <td>{{ $item->armada_id }}</td>
-                                <td>{{ $item->waktu_mulai }}</td>
-                                <td>{{ $item->status }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <ul class="list-group list-group-flush">
+                        @foreach($bookings_telat as $b)
+                            <li class="list-group-item">
+                                <a href="{{ route('booking.show', $b->getKey()) }}">
+                                    {{ $b->no_invoice}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking tidak aktif -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-danger">Booking Tidak Aktif</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach($bookings_tidak_aktif as $b)
+                            <li class="list-group-item">
+                                <a href="{{ route('booking.show', $b->getKey()) }}">
+                                    {{ $b->no_invoice}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

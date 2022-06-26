@@ -6,16 +6,16 @@
             <div class="card rounded-3" style="width: 1100px;">
                 <div class="card-body">
                         <div class="mb-3 mt-3 row">
-                            <label for="" class="col-sm-2 col-form-label">ID Booking Armada :</label>
+                            <label for="" class="col-sm-2 col-form-label">No Invoice :</label>
                             <div class="col-sm-10">
-                                <input disabled type="text" class="form-control " value="{{ $pengembalian->booking_armada_id }}">
+                                <input disabled type="text" class="form-control " value="{{ $pengembalian->booking_armada->booking->no_invoice }}">
                             </div>
-                            @error('booking_armada_id')
-                                <div class="col-sm-2"></div>
-                                <div class="text-danger col-sm-10">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        </div>
+                        <div class="mb-3 mt-3 row">
+                            <label for="" class="col-sm-2 col-form-label">Plat Nomor :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" class="form-control " value="{{ $pengembalian->booking_armada->armada->plat_nomor }}">
+                            </div>
                         </div>
 
                         <div class="mb-3 mt-4 row">
@@ -45,9 +45,11 @@
                         </div>
 
                         <div class="mb-3 mt-4 row">
-                            <label for="" class="col-sm-2 col-form-label">Durasi Telat :</label>
+                            <label for="" class="col-sm-2 col-form-label">Durasi Telat (jam) :</label>
                             <div class="col-sm-10">
-                                <input disabled type="number" name="durasi_telat" class="form-control @error('durasi_telat') is-invalid @enderror" id="durasi_telat"  placeholder="Masukkan Durasi Telat" autocomplete="off"  value="{{ old('durasi_telat', $pengembalian->durasi_telat) }}">
+                                <input disabled type="number" name="durasi_telat" class="form-control @error('durasi_telat') is-invalid @enderror" 
+                                    id="durasi_telat"  placeholder="Masukkan Durasi Telat" autocomplete="off"  
+                                    value="{{ old('durasi_telat', $pengembalian->durasi_telat) }}">
                             </div>
                             @error('durasi_telat')
                                 <div class="col-sm-2"></div>
@@ -81,6 +83,18 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+                        </div>
+
+                        <div class="mb-3 mt-4 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Created At :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $pengembalian->created_at }}">
+                            </div>
+                        </div><div class="mb-3 mt-4 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Created By :</label>
+                            <div class="col-sm-10">
+                                <input disabled type="text" name="bahan_bakar" class="form-control " value="{{ $pengembalian->created_by }}">
+                            </div>
                         </div>
     
                         <div class="mb-3 row mt-4">
