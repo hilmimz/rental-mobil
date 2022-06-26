@@ -44,7 +44,7 @@
                 <button type="submit" class="btn btn-danger mx-2">Logout</button>
             </form>
             <span class="me-2 d-none d-sm-block">{{ Auth::user()->name }}</span>
-            <a href='https://www.instagram.com/fwz_ivdra/' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
+            <a href='#' target='_blank'><img class="navbar-profile-image" src='https://i.postimg.cc/gwMXZQj1/1.jpg' border='0' alt='1'/></a>
         </div>
         {{-- <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
             <li>
