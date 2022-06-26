@@ -97,6 +97,7 @@ class PengembalianController extends Controller
     public function edit(Pengembalian $pengembalian)
     {
         $bookingIDs = BookingArmada::all();/* where('status','=','Aktif')->orwhere('status','=','Telat')->get(); */
+        $this->authorize('superadmin'); 
         return view('dashboard.pengembalian.edit', compact([
             'pengembalian',
             'bookingIDs'
@@ -140,6 +141,7 @@ class PengembalianController extends Controller
      */
     public function destroy(Pengembalian $pengembalian)
     {
+        $this->authorize('superadmin'); 
         $pengembalian->delete();
         return redirect (route('pengembalian.index'))->with('success_remove', 'Data has been removed succesfully!');
     }

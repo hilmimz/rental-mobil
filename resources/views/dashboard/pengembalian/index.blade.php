@@ -54,12 +54,15 @@
 
                         <td>
                             <div class="d-flex justify-content-around">
-                                <a href="{{ route('pengembalian.edit', $pengembalian->id) }}" type="button" class="btn btn-primary btn-sm">
-                                    <i class="ri-pencil-fill "></i>
-                                </a>
+                                @can('superadmin')
+                                    <a href="{{ route('pengembalian.edit', $pengembalian->id) }}" type="button" class="btn btn-primary btn-sm">
+                                        <i class="ri-pencil-fill "></i>
+                                    </a>
+                                @endcan
                                 <a href="{{ route('pengembalian.show', $pengembalian->id) }}" type="button" class="btn btn-info btn-sm">
                                     <i class="ri-eye-line "></i>
                                 </a>
+                                @can('superadmin')
                                 <form action="{{ route('pengembalian.destroy', $pengembalian->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -67,6 +70,7 @@
                                         <i class="ri-delete-bin-fill"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>
