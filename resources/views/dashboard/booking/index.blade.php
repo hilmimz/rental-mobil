@@ -67,9 +67,6 @@
                         <th>Tgl Transaksi</th>
                         {{-- <th>Armada</th> --}}
                         <th>Harga Total</th>
-                        <th>Sisa pembayaran</th>
-                        <th>Status Pembayaran</th>
-                        <th>Status Pengembalian</th>
                         <th>Status</th>
                         <th>Keterangan</th>
                         <th>Aksi</th>
@@ -84,9 +81,6 @@
                             <td>{{ $booking->pelanggan->nama }}</td>
                             <td>{{ $booking->tgl_transaksi }}</td>
                             <td>{{ $booking->harga_total}}</td>
-                            <td>{{ $booking->sisa_pembayaran}}</td>
-                            <td>{{ $booking->status_pembayaran}}</td>
-                            <td>{{ $booking->status_pengembalian}}</td>
                             <td>{{ $booking->status}}</td>
                             <td>{{ $booking->keterangan }}</td>
                             <td>

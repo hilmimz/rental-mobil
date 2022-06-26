@@ -215,6 +215,15 @@ class BookingController extends Controller
         return $pdf->download('dataBooking.pdf');
     }
 
+    public function exportpdfBooking(Request $request){
+        $booking = Booking::find($request->input('id'));
+        // dd($booking);
+
+        view()->share('booking', $booking);
+        $pdf = PDF::loadview('dashboard.booking.invoice');
+        return $pdf->download("rental_mobil_gg_invoice_{$booking->no_invoice}.pdf");
+    }
+
     public function exportexcel(){
         return Excel::download(new BookingExport, 'dataBooking.xlsx');
     }
