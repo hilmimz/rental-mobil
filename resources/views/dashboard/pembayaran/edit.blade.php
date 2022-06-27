@@ -70,6 +70,10 @@
                                 <select class="form-select mt-3 @error('tipe_pembayaran') is-invalid @enderror" aria-label="Default select example" name="tipe_pembayaran" class="form-control" id="tipe_pembayaran">
                                     <option @if(old('tipe_pembayaran', $pembayarans->tipe_pembayaran) == "DP") selected @endif value="DP">DP</option>
                                     <option @if(old('tipe_pembayaran', $pembayarans->tipe_pembayaran) == "Pelunasan") selected @endif value="Pelunasan">Pelunasan</option>
+                                    <option @if(old('tipe_pembayaran', $pembayarans->tipe_pembayaran) == "Denda") selected @endif value="Denda">Denda</option>
+                                    <option @if(old('tipe_pembayaran', $pembayarans->tipe_pembayaran) == "Pelunasan dan Denda") selected @endif value="Pelunasan dan Denda">Pelunasan dan Denda</option>
+
+
                                 </select>
                             </div>
                             @error('tipe_pembayaran')

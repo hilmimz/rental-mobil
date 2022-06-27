@@ -85,6 +85,8 @@
                                     <option @if(!old('tipe_pembayaran')) selected @endif value="">Pilih Tipe Pembayaran</option>
                                     <option @if(old('tipe_pembayaran') == "DP") selected @endif value="DP">DP</option>
                                     <option @if(old('tipe_pembayaran') == "Pelunasan") selected @endif value="Pelunasan">Pelunasan</option>
+                                    <option @if(old('tipe_pembayaran') == "Denda") selected @endif value="Denda">Denda</option>
+                                    <option @if(old('tipe_pembayaran') == "Pelunasan dan Denda") selected @endif value="Pelunasan dan Denda">Pelunasan dan Denda</option>
                                 </select>
                             </div>
                             @error('tipe_pembayaran')
