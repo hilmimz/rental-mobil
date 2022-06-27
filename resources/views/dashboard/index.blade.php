@@ -110,6 +110,28 @@
     {{-- Status Booking --}}
     <div class="row flex-wrap">
 
+        <!-- Booking aktif -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-success">Booking Aktif</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach($bookings_aktif as $b)
+                            <li class="list-group-item">
+                                <a href="{{ route('booking.show', $b->getKey()) }}">
+                                    {{ $b->no_invoice}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <!-- Booking telat -->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">

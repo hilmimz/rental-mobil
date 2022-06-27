@@ -46,18 +46,27 @@ class DashboardController extends Controller
         }
 
 
+        $bookings_aktif = [];
         $bookings_telat = [];
         $bookings_tidak_aktif = [];
         foreach(Booking::all() as $booking){
             if($booking->status == "Tidak aktif"){
                 array_push($bookings_tidak_aktif, $booking);
                 // break;
-            } else {
+            } else if($booking->status == "Aktif"){
+                // array_push($bookings_aktif, $booking);
+                $aktif = true;
                 foreach($booking->booking_armadas as $ba){
                     if($ba->status == "Telat"){
-                        array_push($bookings_telat, $booking);
-                        // break;
+                        $aktif = false;
+                        break;
                     }
+                }
+
+                if($aktif){
+                    array_push($bookings_aktif, $booking);
+                } else {
+                    array_push($bookings_telat, $booking);
                 }
 
             }
@@ -65,6 +74,7 @@ class DashboardController extends Controller
         }
 
         return view('dashboard.index', [
+            'bookings_aktif' => $bookings_aktif,
             'bookings_telat' => $bookings_telat,
             'bookings_tidak_aktif' => $bookings_tidak_aktif,
             'bookingArr' => $bookingArr,
