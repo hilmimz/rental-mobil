@@ -1,64 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 🚗 Laravel Dashboard Rental Mobil
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dashboard ini dikembangkan menggunakan Laravel sebagai backend dan Bootstrap untuk tampilan antarmuka. Sistem ini membantu pengelolaan data rental mobil secara efisien, mencakup transaksi, data armada, pelanggan, hingga laporan yang bisa diekspor.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🖼️ Tampilan Aplikasi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔹 Halaman Awal Dashboard
+Menampilkan ringkasan statistik dan grafik transaksi bulanan. Di bagian atas tersedia data penting seperti:
+- Total Mobil
+- Mobil Tersedia
+- Jumlah Booking
+- Data Pelanggan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Menu utama dashboard meliputi:
+- Data Pelanggan  
+- Data Merk  
+- Data Armada  
+- Data Booking  
+- Booking Armada  
+- Pembayaran  
+- Pengembalian  
 
-## Learning Laravel
+![Screenshot 2025-04-23 105104](https://github.com/user-attachments/assets/78bc2fcd-bb77-4601-9d35-db1aa65274b9)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🔹 Menu "Data Pelanggan"
+Setiap menu menampilkan data dalam bentuk tabel yang lengkap dengan fitur CRUD (Create, Read, Update, Delete).
 
-## Laravel Sponsors
+![Screenshot 2025-04-23 105324](https://github.com/user-attachments/assets/25ce098a-8c05-4ca0-8f12-7382d02e33a1)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+### 🔹 Contoh Form CRUD
+Tampilan form saat menambah atau mengedit data, dilengkapi dengan tampilan interaktif (misal: kursor yang sedang mengedit data pelanggan).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+![Screenshot 2025-04-23 110431](https://github.com/user-attachments/assets/052ca54f-1494-4cbd-97c4-806db20713cc)
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 🔹 Menu "Data Booking"
+Selain fitur CRUD, menu ini dilengkapi **fitur ekspor laporan ke PDF dan Excel** untuk keperluan administrasi.
 
-## Code of Conduct
+![Screenshot 2025-04-23 105350](https://github.com/user-attachments/assets/361168ad-fc69-495a-be46-a83d53877d7a)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+### 🔹 Hasil Export PDF
+Contoh hasil ekspor data booking dalam bentuk PDF, tertata rapi dan siap digunakan sebagai laporan resmi.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Screenshot 2025-04-23 105550](https://github.com/user-attachments/assets/378bf916-030b-42ce-969e-97c16be37300)
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛠️ Cara Menjalankan
+
+1. Clone repositori:
+   ```bash
+   git clone https://github.com/username/rental-mobil.git
+   cd rental-mobil
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk **penggunaan pribadi dan edukatif**. **Dilarang digunakan secara komersial** tanpa izin tertulis dari pembuat.
+
+Beberapa elemen frontend menggunakan template pihak ketiga. Hak cipta atas elemen tersebut tetap milik pembuat aslinya.
+
+📩 Untuk pertanyaan lisensi lebih lanjut, silakan hubungi pembuat proyek ini.
+
+❗ Kami tidak bertanggung jawab atas penyalahgunaan atau pelanggaran lisensi oleh pihak lain.
+
